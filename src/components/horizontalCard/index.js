@@ -8,13 +8,7 @@ export default function Cards({ item, width , height, index}){
     return(
      <View style={{...cardStyles.card,...{width, height,}}}>
          <Text style={cardStyles.pname }>{item.name}</Text>
-         {  
-         item.name == 'Books' || item.name == 'Forums'? 
-         <MaterialCommunityIcons name={item.icon} size={40} color="white" /> :
-         item.name == "Extras" ?
-         <Entypo name={item.icon} size={40} color="white" /> :
-         <FontAwesome5 name={item.icon} size={40} color="white" />
-     }
+         <Entypo name={item.icon} size={40} color="white" />
      </View>
     )
    }

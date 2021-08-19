@@ -22,7 +22,7 @@ export default function DummyScreen({ route, navigation }) {
 
     async function getCourses() {
         try {
-            const response = await fetch(`http://192.168.0.113:7000/education.com/backend/api/v1/users/get/getCourse/${screenDetails._id}`);
+            const response = await fetch(`http://192.168.2.107:7000/education.com/backend/api/v1/users/get/getCourse/${screenDetails._id}`);
             const json = await response.json();
             setCourses(json.courses);
             console.log(courses)
@@ -31,10 +31,11 @@ export default function DummyScreen({ route, navigation }) {
         }
     }
 
-
-  useEffect(() => {
-      getCourses()
-  }, [])
+    useFocusEffect(
+        React.useCallback(() => {
+            getCourses()
+        }, [screenDetails._id])
+      );
 
     return (
         <LayoutComp navigation={navigation} title={`${screenDetails.name}`}>
@@ -45,9 +46,9 @@ export default function DummyScreen({ route, navigation }) {
                     data={courses}
                     numColumns={2}
                     renderItem={({ item }) => {
-                        console.log(item);
+                        item.key = `${item._id}`
                         return (
-                            <TouchableOpacity onPress={() => navigation.navigate("Read", item)} activeOpacity={0.9}>
+                            <TouchableOpacity onPress={() => navigation.navigate("Read",item)} activeOpacity={0.9}>
                                 <VerticalCard height={HEIGHT * 0.25} width={WIDTH * 0.4} item={item} />
                             </TouchableOpacity>
                         )

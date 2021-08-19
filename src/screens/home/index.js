@@ -31,15 +31,15 @@ export default function Home({ navigation }) {
     
     const [bottomList, setBottomList] = useState([
         { name: 'School', icon: "book", key: '1' },
-        { name: 'JHS', icon: "chalkboard-teacher", key: '2' },
-        { name: 'Exams', icon: "newspaper", key: '3' },
+        { name: 'JHS', icon: "open-book", key: '2' },
+        { name: 'Exams', icon: "clipboard", key: '3' },
         { name: 'Extras', icon: "lab-flask", key: '4' },
-        { name: 'Books', icon: "bookshelf", key: '5' },
+        { name: 'Books', icon: "open-book", key: '5' },
     ])
 
     async function getCategories() {
         try {
-            const response = await fetch('http://192.168.0.113:7000/education.com/backend/api/v1/users/get/category');
+            const response = await fetch('http://192.168.2.107:7000/education.com/backend/api/v1/users/get/category');
             const json = await response.json();
             setCategories(json.category);
         } catch (error) {
@@ -81,19 +81,14 @@ export default function Home({ navigation }) {
                 <FlatList
                     data={categories}
                     showsVerticalScrollIndicator={false}
+                    keyExtractor={item => item._id}
                     renderItem={({ item, index }) => {
                         item.icon = bottomList[index].icon;
-                        item.key = bottomList[index].key
                         return (
                             <>
                                 <TouchableOpacity onPress={() => navigation.navigate("List", item)} activeOpacity={0.9}>
                                     <HorizontalCard item={item} index={index} height={HEIGHT * 0.15} width={WIDTH * 0.9} />
                                 </TouchableOpacity>
-                                {index === bottomList.length - 1 ?
-                                    <TouchableOpacity onPress={() => navigation.navigate("List", item)} activeOpacity={0.9}>
-                                        <HorizontalCard item={{ name: "Forums", icon: 'forum' }} height={HEIGHT * 0.15} width={WIDTH * 0.9} />
-                                    </TouchableOpacity> : <View />
-                                }
                             </>
                         )
                     }}

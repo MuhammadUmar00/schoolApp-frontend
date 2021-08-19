@@ -9,7 +9,7 @@ import { Feather } from '@expo/vector-icons';
 const WIDTH = Dimensions.get('screen').width
 const HEIGHT = Dimensions.get('screen').height
 
-export default function ReadScreen({route}) {
+export default function ReadScreen({route, navigation}) {
     const screenDetails = route.params
 
 
@@ -40,7 +40,9 @@ export default function ReadScreen({route}) {
                         All Term
                     </Text>
                 </View>
-                <TouchableOpacity style={{ alignSelf: 'center' }}>
+                <TouchableOpacity 
+                onPress={() => navigation.navigate("ViewPDF", screenDetails)}
+                style={{ alignSelf: 'center' }}>
                     <ButtonComp
                         width={WIDTH * 0.7}
                         height={HEIGHT * 0.05}

@@ -13,7 +13,7 @@ export const dashboardStyles = StyleSheet.create({
         top: '5%'
     },
     imagewrappers:{
-        height:'25%',
+        height:'30%',
         width:'100%',
         backgroundColor: "#128da5",
         borderBottomLeftRadius: 20,

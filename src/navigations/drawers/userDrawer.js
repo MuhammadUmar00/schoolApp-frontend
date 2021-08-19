@@ -9,17 +9,18 @@ import {
     Home,
     Login,
     Signup,
-    AdminLogin
+    AdminLogin,
+    ViewPDF
 } from '../../screens';
 import LayOut  from '../../components/layout';
 import { UserDrawerComp } from '../../components/customDrawer';
+import AdminDrawer from './adminDrawer';
 
 
 const Drawer = createDrawerNavigator();
 
 export default function UserDrawer() {
     return (
-        <NavigationContainer>
             <Drawer.Navigator initialRouteName="Home" drawerContent={(props) => <UserDrawerComp {...props} />}>
                 <Drawer.Screen name="Home" component={Home} options={{headerShown:false}} />
                 <Drawer.Screen name="List" component={ListScreen} options={{headerShown:false}} />
@@ -30,7 +31,8 @@ export default function UserDrawer() {
                 <Drawer.Screen name="Login" component={Login} options={{headerShown:false}} />
                 <Drawer.Screen name="Signup" component={Signup} options={{headerShown:false}} />
                 <Drawer.Screen name="AdminLogin" component={AdminLogin} options={{headerShown:false}} />
+                <Drawer.Screen name="ViewPDF" component={ViewPDF} options={{headerShown:false}} />
+                <Drawer.Screen name="Admin" component={AdminDrawer} options={{headerShown:false}} />
             </Drawer.Navigator>
-        </NavigationContainer>
     );
 }

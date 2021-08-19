@@ -80,7 +80,7 @@ export default function AddCourse({ navigation }) {
 
     async function getCategories() {
         try {
-            const response = await fetch('http://192.168.0.113:7000/education.com/backend/api/v1/users/get/category');
+            const response = await fetch('http://192.168.2.107:7000/education.com/backend/api/v1/users/get/category');
             const json = await response.json();
             setCategorie(json.category);
             console.log(categorie)
@@ -90,7 +90,7 @@ export default function AddCourse({ navigation }) {
     }
     async function getSubCategories() {
         try {
-            const response = await fetch('http://192.168.0.113:7000/education.com/backend/api/v1/users/get/all-sub-categorie');
+            const response = await fetch('http://192.168.2.107:7000/education.com/backend/api/v1/users/get/all-sub-categorie');
             const json = await response.json();
             setSubCategorie(json.subCategories);
             console.log(subCategorie)
@@ -118,7 +118,7 @@ export default function AddCourse({ navigation }) {
                             initialValues={{ name: '', categorie: '', subcategorie: '' }}
                             onSubmit={async(values, actions) => {
                                 upload(values, courseFile, 
-`http://192.168.0.113:7000/education.com/backend/api/v1/addCourse/sdfsdf/asdasdasd`)
+`http://192.168.2.107:7000/education.com/backend/api/v1/addCourse/sdfsdf/asdasdasd`)
                                 // actions.resetForm()
                             }
                             }>

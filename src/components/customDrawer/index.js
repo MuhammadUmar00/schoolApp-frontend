@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, FlatList, ImageBackground } from 'react-native';
 import { Drawer } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
     DrawerContentScrollView,
     DrawerItem
@@ -14,8 +15,46 @@ import { styles } from './customDrawerStyles'
 
 export function UserDrawerComp(props) {
 
-    const basicTerm = [{ name: "Basic Term 1", key: '1' }, { name: "Basic Term 2", key: '2' }, { name: "Basic Term 3", key: '3' }]
-    const jhsSemester = ["JHS Semester 1", "JHS Semester 2"]
+    const [subCategorie, setSubCategorie] = useState('')
+    const [user, setUser] = useState(null)
+
+    const termList = [
+        { icon: 'filter-1', key: '1' },
+        { icon: 'filter-2', key: '2' },
+        { icon: 'filter-3', key: '3' },
+        { icon: 'filter-1', key: '4' },
+        { icon: 'filter-2', key: '5' },
+        { icon: 'clipboard', key: '7' },
+        { icon: 'lab-flask', key: '8' },
+        { icon: 'book', key: '9' },
+    ]
+
+    function getUser(){
+        setUser(AsyncStorage.getItem("user"))
+        console.log(user, "checkuser")
+    }
+    
+    function logOut() {
+        AsyncStorage.clear()
+        setUser(null)
+        props.navigation.navigate("Home")
+    }
+
+
+    async function getSubCategories() {
+        try {
+            const response = await fetch('http://192.168.2.107:7000/education.com/backend/api/v1/users/get/all-sub-categorie');
+            const json = await response.json();
+            setSubCategorie(json.subCategories);
+           // console.log(subCategorie)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    useEffect(() => {
+        getSubCategories()
+        getUser()
+    }, [])
 
 
     return (
@@ -45,97 +84,35 @@ export function UserDrawerComp(props) {
                             />
                         </View>
                         <View style={styles.homeView}>
-                            <DrawerItem
-                                icon={() => (
-                                    <MaterialIcons
-                                        name="filter-1"
-                                        color='#128da5'
-                                        size={20}
-                                    />
-                                )}
-                                label="Basir Term 1"
-                                onPress={() => { props.navigation.navigate('Boxes', { name: 'Basic Term 1' }) }}
-                            />
-                            <DrawerItem
-                                icon={() => (
-                                    <MaterialIcons
-                                        name="filter-2"
-                                        color='#128da5'
-                                        size={20}
-                                    />
-                                )}
-                                label="Basir Term 2"
-                                onPress={() => { props.navigation.navigate('Boxes', { name: 'Basic Term 2' }) }}
-                            />
-                            <DrawerItem
-                                icon={() => (
-                                    <MaterialIcons
-                                        name="filter-3"
-                                        color='#128da5'
-                                        size={20}
-                                    />
-                                )}
-                                label="Basir Term 3"
-                                onPress={() => { props.navigation.navigate('Boxes', { name: 'Basic Term 3' }) }}
-                            />
+                            {  subCategorie !== '' &&  
+                                subCategorie?.map((item,index) => {
+                                    item.icon = termList[index].icon
+                                    return (
+                                        <DrawerItem
+                                            icon={() => (
+                                                <>
+                                                { index < 5 ?
+                                                <MaterialIcons
+                                                    name={item.icon}
+                                                    color='#128da5'
+                                                    size={20}
+                                                /> :
+                                                <Entypo
+                                                    name={item.icon}
+                                                    color='#128da5'
+                                                    size={20}
+                                                />
+                                                }
+                                                </>
+                                            )}
+                                            label={item.name}
+                                            onPress={() => { props.navigation.navigate('Boxes', item) }}
+                                        />
+                                    )
+                                })
+                            }
                         </View>
-                        <View style={styles.homeView}>
-                            <DrawerItem
-                                icon={() => (
-                                    <MaterialIcons
-                                        name="filter-1"
-                                        color='#128da5'
-                                        size={20}
-                                    />
-                                )}
-                                label="JHS Semester 1"
-                                onPress={() => { props.navigation.navigate('Boxes', { name: 'JHS Semester 1' }) }}
-                            />
-                            <DrawerItem
-                                icon={() => (
-                                    <MaterialIcons
-                                        name="filter-2"
-                                        color='#128da5'
-                                        size={20}
-                                    />
-                                )}
-                                label="JHS Semester 2"
-                                onPress={() => { props.navigation.navigate('Boxes', { name: 'JHS Semester 1' }) }}
-                            />
-                        </View>
-                        <View style={styles.homeView}>
-                            <DrawerItem
-                                icon={() => (
-                                    <Feather
-                                        name="clipboard"
-                                        color='#128da5'
-                                        size={20}
-                                    />
-                                )}
-                                label="Exams"
-                                onPress={() => { props.navigation.navigate('Boxes', { name: 'Exam' }) }}
-                            /><DrawerItem
-                                icon={() => (
-                                    <Entypo
-                                        name="lab-flask"
-                                        color='#128da5'
-                                        size={20}
-                                    />
-                                )}
-                                label="Extras"
-                                onPress={() => { props.navigation.navigate('Boxes', { name: 'Extras' }) }}
-                            /><DrawerItem
-                                icon={() => (
-                                    <Entypo
-                                        name="book"
-                                        color='#128da5'
-                                        size={20}
-                                    />
-                                )}
-                                label="Text Book"
-                                onPress={() => { props.navigation.navigate('Boxes', { name: 'Text Books' }) }}
-                            />
-                        </View>
+                        {user == null ?
                         <DrawerItem
                             icon={() => (
                                 <AntDesign
@@ -146,7 +123,19 @@ export function UserDrawerComp(props) {
                             )}
                             label="Log In"
                             onPress={() => { props.navigation.navigate('Login') }}
+                        /> :
+                        <DrawerItem
+                            icon={() => (
+                                <AntDesign
+                                    name="login"
+                                    color='#128da5'
+                                    size={23}
+                                />
+                            )}
+                            label="Log Out"
+                            onPress={logOut}
                         />
+                            }
                     </Drawer.Section>
                 </View>
             </DrawerContentScrollView>

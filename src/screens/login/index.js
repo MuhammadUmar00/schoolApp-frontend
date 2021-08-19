@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, TextInput, TouchableOpacity, Dimensions } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { ButtonComp } from '../../components'
@@ -23,7 +24,25 @@ export default function Login({ navigation }) {
             .required()
             .min(6),
     })
-
+   
+    function login(values){
+        try {
+            fetch(`http://192.168.2.107:7000/education.com/backend/api/v1/login/${values.email}/${values.password}`)
+            .then(async(response) => {
+              const resJSON = await response.json()
+              if(resJSON.success === true) {
+                alert("Login Succesful")
+                AsyncStorage.setItem('user', JSON.stringify(resJSON))
+                navigation.navigate("Home")
+              }
+              else{
+                  alert("Username or Password is incorrect")
+              }
+            })
+          } catch (error) {
+            console.log(error)
+          }
+    }
 
     return (
         <View style={loginStyles.container}>
@@ -32,7 +51,7 @@ export default function Login({ navigation }) {
                 validationSchema={loginSchema}
                 initialValues={{ email: '', password: '', }}
                 onSubmit={(values, actions) => {
-                    console.log(values)
+                    login(values)
                     actions.resetForm()
                 }
                 }>
@@ -86,11 +105,11 @@ export default function Login({ navigation }) {
                                 <TouchableOpacity onPress={() => navigation.navigate('AdminLogin')} style={loginStyles.loginAsAdmin}>
                                     <ButtonComp
                                         title="Login as Admin"
-                                        width={WIDTH * 0.3}
-                                        height={HEIGHT * 0.05}
+                                        width={WIDTH * 0.4}
+                                        height={HEIGHT * 0.06}
                                         color='#fff'
                                         backgroundColor='#128da5'
-                                        borderRadius={0}
+                                        borderRadius={5}
                                     />
                                 </TouchableOpacity>
                             </>

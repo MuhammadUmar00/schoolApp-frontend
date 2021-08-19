@@ -7,16 +7,17 @@ import {
     ReadScreen,
     AdminLogin,
     AddCourse,
-    Dashboard
+    Dashboard,
+    ViewPDF
 } from '../../screens';
 import LayOut  from '../../components/layout';
 import  { AdminDrawerComp }  from '../../components/adminDrawer';
+import HomeDrawer  from './userDrawer'
 
 const Drawer = createDrawerNavigator();
 
 export default function AdminDrawer() {
     return (
-        <NavigationContainer>
             <Drawer.Navigator initialRouteName="Home" drawerContent={(props) => <AdminDrawerComp {...props} />}>
                 <Drawer.Screen name="Home" component={Dashboard} options={{headerShown:false}} />
                 <Drawer.Screen name="AddCourse" component={AddCourse} options={{headerShown:false}} />
@@ -25,7 +26,8 @@ export default function AdminDrawer() {
                 <Drawer.Screen name="Read" component={ReadScreen} options={{headerShown:false}} />
                 <Drawer.Screen name="Layout" component={LayOut} options={{headerShown:false}} />
                 <Drawer.Screen name="AdminLogin" component={AdminLogin} options={{headerShown:false}} />
+                <Drawer.Screen name="ViewPDF" component={ViewPDF} options={{headerShown:false}} />
+                <Drawer.Screen name="HomeDrawer" component={HomeDrawer} options={{headerShown:false}} />
             </Drawer.Navigator>
-        </NavigationContainer>
     );
 }

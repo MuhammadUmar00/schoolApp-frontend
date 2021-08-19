@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, TextInput, TouchableOpacity, Dimensions } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { ButtonComp } from '../../components'
@@ -35,14 +36,42 @@ const signupSchema = yup.object({
   })
 
 export default function Signup({ navigation }) {
+
+    function signup(values) {
+    //    alert(JSON.stringify(values));
+        try {
+            fetch(`http://192.168.2.107:7000/education.com/backend/api/v1/register`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(values)
+            }).then(async (response) => {
+                const resJSON = await response.json()
+                if(resJSON.success === true) {
+                    alert("Account has been Created")
+                    AsyncStorage.setItem('user', JSON.stringify(resJSON))
+                    navigation.navigate("Home")
+                  }
+                  else{
+                      alert("This email is already in use of an Other Account")
+                  }
+            })
+          } catch (error) {
+            console.log(error)
+          }
+    }
+    
+
     return (
         <View style={signupStyles.container}>
             <Formik
                 validationSchema={signupSchema}
-                initialValues={{ name: '', email: '', phone: '', password: '', }}
+                initialValues={{ name: 'nabeel', email: 'nabeel@gmail.com', phone: '03123456789', password: '1234567',type:'user' }}
                 onSubmit={(values,actions) => {
-                  console.log(values)
-                  actions.resetForm()
+                    signup(values)
+                 //alert(JSON.stringify(values))
+                  //actions.resetForm()
                 }
                 }>
                 {
