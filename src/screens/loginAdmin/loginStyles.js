@@ -44,5 +44,12 @@ export const loginStyles = StyleSheet.create({
         alignSelf: 'flex-end',
         position: 'absolute',
         top: 0
-    }
+    },
+    errtext: {
+        color: 'crimson',
+        alignSelf: 'center',
+        fontSize: 9.5,
+        fontWeight: 'bold',
+        fontFamily: "monospace"
+      },
 })

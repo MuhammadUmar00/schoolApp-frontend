@@ -21,7 +21,7 @@ export default function Splash({ navigation }) {
           }
 
     useEffect(() => {
-       getUser()
+       setTimeout(getUser, 3000);
     }, [])
 
     return (

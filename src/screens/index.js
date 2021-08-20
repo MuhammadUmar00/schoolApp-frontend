@@ -10,6 +10,7 @@ import AddCourse from './admin/addCourse'
 import Dashboard from './admin/dashboard'
 import Splash from './splash'
 import ViewPDF from './viewPdf'
+import Chat from './chat'
 
 export {
     Home,
@@ -23,5 +24,6 @@ export {
     AddCourse,
     Dashboard,
     Splash,
-    ViewPDF
+    ViewPDF,
+    Chat
 }

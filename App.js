@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NativeBaseProvider } from 'native-base';
 import LayOut from './src/components/layout';
 import { AdminDrawer, HomeDrawer, MainStack }  from './src/navigations'
-import { DummyScreen, ListScreen, ReadScreen, Login, Signup, Home, AddCourse, Dashboard, Splash, ViewPDF } from './src/screens';
+import { DummyScreen, ListScreen, ReadScreen, Login, Signup, Home, AddCourse, Dashboard, Splash, ViewPDF, Chat } from './src/screens';
 
 export default function App() {
   return (

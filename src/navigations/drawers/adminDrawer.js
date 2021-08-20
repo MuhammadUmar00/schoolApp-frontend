@@ -8,7 +8,8 @@ import {
     AdminLogin,
     AddCourse,
     Dashboard,
-    ViewPDF
+    ViewPDF,
+    Chat
 } from '../../screens';
 import LayOut  from '../../components/layout';
 import  { AdminDrawerComp }  from '../../components/adminDrawer';
@@ -28,6 +29,7 @@ export default function AdminDrawer() {
                 <Drawer.Screen name="AdminLogin" component={AdminLogin} options={{headerShown:false}} />
                 <Drawer.Screen name="ViewPDF" component={ViewPDF} options={{headerShown:false}} />
                 <Drawer.Screen name="HomeDrawer" component={HomeDrawer} options={{headerShown:false}} />
+                <Drawer.Screen name="Chat" component={Chat} options={{headerShown:false}} />
             </Drawer.Navigator>
     );
 }

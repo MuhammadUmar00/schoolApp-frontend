@@ -37,9 +37,14 @@ export default function Home({ navigation }) {
         { name: 'Books', icon: "open-book", key: '5' },
     ])
 
+    const forum = {
+        name: 'Forum',
+        icon: 'chat'
+    }
+
     async function getCategories() {
         try {
-            const response = await fetch('http://192.168.2.107:7000/education.com/backend/api/v1/users/get/category');
+            const response = await fetch('http://192.168.0.121:7000/education.com/backend/api/v1/users/get/category');
             const json = await response.json();
             setCategories(json.category);
         } catch (error) {
@@ -60,7 +65,7 @@ export default function Home({ navigation }) {
             <View style={homeStyles.imagewrappers}>
             </View>
             <View style={homeStyles.topcontainer}>
-                <Text style={{ marginTop: '20%', textAlign: 'center', fontSize: 15, width: "90%", fontWeight: '900', color: 'white', fontFamily: "monospace", fontWeight: "bold" }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Text>
+                <Text style={{ marginTop: '20%', textAlign: 'center', fontSize: 15, width: "90%", fontWeight: '900', color: 'white', fontFamily: "monospace", fontWeight: "bold" }}>Welcome to Ghana's number One Educational Application.</Text>
             </View>
             <View style={{ height: "20%", padding: "5%", width: '100%', }}>
                 <FlatList
@@ -89,6 +94,11 @@ export default function Home({ navigation }) {
                                 <TouchableOpacity onPress={() => navigation.navigate("List", item)} activeOpacity={0.9}>
                                     <HorizontalCard item={item} index={index} height={HEIGHT * 0.15} width={WIDTH * 0.9} />
                                 </TouchableOpacity>
+                                { index === categories.length - 1 &&
+                                    <TouchableOpacity onPress={() => navigation.navigate("Chat")} activeOpacity={0.9}>
+                                    <HorizontalCard item={forum} height={HEIGHT * 0.15} width={WIDTH * 0.9} />
+                                </TouchableOpacity>
+                                }
                             </>
                         )
                     }}

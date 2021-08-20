@@ -10,7 +10,8 @@ import {
     Login,
     Signup,
     AdminLogin,
-    ViewPDF
+    ViewPDF,
+    Chat
 } from '../../screens';
 import LayOut  from '../../components/layout';
 import { UserDrawerComp } from '../../components/customDrawer';
@@ -33,6 +34,7 @@ export default function UserDrawer() {
                 <Drawer.Screen name="AdminLogin" component={AdminLogin} options={{headerShown:false}} />
                 <Drawer.Screen name="ViewPDF" component={ViewPDF} options={{headerShown:false}} />
                 <Drawer.Screen name="Admin" component={AdminDrawer} options={{headerShown:false}} />
+                <Drawer.Screen name="Chat" component={Chat} options={{headerShown:false}} />
             </Drawer.Navigator>
     );
 }

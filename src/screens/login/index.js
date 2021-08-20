@@ -27,7 +27,7 @@ export default function Login({ navigation }) {
    
     function login(values){
         try {
-            fetch(`http://192.168.2.107:7000/education.com/backend/api/v1/login/${values.email}/${values.password}`)
+            fetch(`http://192.168.0.121:7000/education.com/backend/api/v1/login/${values.email}/${values.password}`)
             .then(async(response) => {
               const resJSON = await response.json()
               if(resJSON.success === true) {

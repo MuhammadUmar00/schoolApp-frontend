@@ -28,6 +28,10 @@ export default function Dashboard({ navigation }) {
             { name: 'Extras', icon: "lab-flask", key: '4' },
             { name: 'Books', icon: "open-book", key: '5' },
         ])
+        const forum = {
+            name: 'Forum',
+            icon: 'chat'
+        }
 
     const [categories, setCategories] = useState('')
 
@@ -35,7 +39,7 @@ export default function Dashboard({ navigation }) {
     
     async function getCategories() {
         try {
-            const response = await fetch('http://192.168.2.107:7000/education.com/backend/api/v1/users/get/category');
+            const response = await fetch('http://192.168.0.121:7000/education.com/backend/api/v1/users/get/category');
             const json = await response.json();
             setCategories(json.category);
             console.log(categories)
@@ -72,6 +76,11 @@ export default function Dashboard({ navigation }) {
                                 <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate('List',item)} >
                                     <HorizontalCard item={item} height={HEIGHT * 0.2} width={WIDTH * 0.9} />
                                 </TouchableOpacity>
+                                { index === categories.length - 1 &&
+                                    <TouchableOpacity onPress={() => navigation.navigate("Chat")} activeOpacity={0.9}>
+                                    <HorizontalCard item={forum} height={HEIGHT * 0.15} width={WIDTH * 0.9} />
+                                </TouchableOpacity>
+                                }
                             </>
                         )
                     }}
