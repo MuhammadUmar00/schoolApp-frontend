@@ -40,7 +40,7 @@ export default function Signup({ navigation }) {
     function signup(values) {
     //    alert(JSON.stringify(values));
         try {
-            fetch(`http://192.168.0.121:7000/education.com/backend/api/v1/register`, {
+            fetch(`http://192.168.2.107:7000/education.com/backend/api/v1/register`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'

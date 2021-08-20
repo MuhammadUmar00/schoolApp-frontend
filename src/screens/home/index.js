@@ -6,6 +6,7 @@ import {
     FlatList,
     Dimensions,
     TouchableOpacity,
+    Linking,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { HorizontalCard, Card } from '../../components'
@@ -25,7 +26,7 @@ export default function Home({ navigation }) {
 
     const [topList, setTopList] = useState([
         { name: 'Repair', icon: "hammer-screwdriver", key: '1' },
-        { name: 'Alert', icon: "bell", key: '2' },
+        { name: 'News', icon: "bell", key: '2' },
         { name: 'Enquiry', icon: "phone-call", key: '3' },
     ])
     
@@ -44,7 +45,7 @@ export default function Home({ navigation }) {
 
     async function getCategories() {
         try {
-            const response = await fetch('http://192.168.0.121:7000/education.com/backend/api/v1/users/get/category');
+            const response = await fetch('http://192.168.2.107:7000/education.com/backend/api/v1/users/get/category');
             const json = await response.json();
             setCategories(json.category);
         } catch (error) {
@@ -56,6 +57,14 @@ export default function Home({ navigation }) {
     useEffect(() => {
         getCategories()
     }, [])
+
+    function enquiryAlert(){
+        alert("E-mail: pbmotivate@gmail.com \n\nCall/Whatsapp: 0206429275 / 0557093036 \n\nFacebook/Instagram/Twitter: @pbpagez")
+    }
+
+    function redirect(){
+        Linking.openURL('https://www.pbpagez.com/')
+    }
 
 
     return (
@@ -75,9 +84,19 @@ export default function Home({ navigation }) {
                     data={topList}
                     renderItem={({ item, index }) => {
                         return (
-                            <TouchableOpacity activeOpacity={0.9} >
+                            <>{item.name === 'Enquiry' ?
+                            <TouchableOpacity activeOpacity={0.9} onPress={enquiryAlert}>
                                 <Card item={item} height={HEIGHT * 0.105} width={HEIGHT * 0.105} />
-                            </TouchableOpacity>
+                            </TouchableOpacity> : item.name === 'News' ?
+                            <TouchableOpacity activeOpacity={0.9} onPress={redirect}>
+                            <Card item={item} height={HEIGHT * 0.105} width={HEIGHT * 0.105} />
+                        </TouchableOpacity> : 
+                        <TouchableOpacity activeOpacity={0.9}>
+                        <Card item={item} height={HEIGHT * 0.105} width={HEIGHT * 0.105} />
+                    </TouchableOpacity>
+                    }
+                            </>
+                        
                         )
                     }}
                 />
@@ -94,11 +113,6 @@ export default function Home({ navigation }) {
                                 <TouchableOpacity onPress={() => navigation.navigate("List", item)} activeOpacity={0.9}>
                                     <HorizontalCard item={item} index={index} height={HEIGHT * 0.15} width={WIDTH * 0.9} />
                                 </TouchableOpacity>
-                                { index === categories.length - 1 &&
-                                    <TouchableOpacity onPress={() => navigation.navigate("Chat")} activeOpacity={0.9}>
-                                    <HorizontalCard item={forum} height={HEIGHT * 0.15} width={WIDTH * 0.9} />
-                                </TouchableOpacity>
-                                }
                             </>
                         )
                     }}

@@ -43,7 +43,7 @@ export function UserDrawerComp(props) {
 
     async function getSubCategories() {
         try {
-            const response = await fetch('http://192.168.0.121:7000/education.com/backend/api/v1/users/get/all-sub-categorie');
+            const response = await fetch('http://192.168.2.107:7000/education.com/backend/api/v1/users/get/all-sub-categorie');
             const json = await response.json();
             setSubCategorie(json.subCategories);
            // console.log(subCategorie)

@@ -25,5 +25,5 @@ export {
     Dashboard,
     Splash,
     ViewPDF,
-    Chat
+    Chat,
 }

@@ -16,7 +16,7 @@ export default function ViewPDF({ route }) {
                     }
                 }}
                 source={{
-                    uri: `http://192.168.0.121:7000${item.file}`,
+                    uri: `http://192.168.2.107:7000${item.file}`,
                 }}
             />
         </View>

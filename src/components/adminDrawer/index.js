@@ -27,7 +27,7 @@ export function AdminDrawerComp(props) {
 
     async function getCategories() {
         try {
-            const response = await fetch('http://192.168.0.121:7000/education.com/backend/api/v1/users/get/category');
+            const response = await fetch('http://192.168.2.107:7000/education.com/backend/api/v1/users/get/category');
             const json = await response.json();
             setCategories(json.category);
         } catch (error) {

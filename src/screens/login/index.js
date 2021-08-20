@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, Dimensions } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -24,16 +24,32 @@ export default function Login({ navigation }) {
             .required()
             .min(6),
     })
+
+    const [ currentUser, setCurrentUser ] = useState(null)
+    
+    async function setUser(key,resJSON){
+        try{
+         await AsyncStorage.setItem(key, JSON.stringify(resJSON))
+    }
+catch(error){
+    console.warn(error)
+}
+    }
    
     function login(values){
         try {
-            fetch(`http://192.168.0.121:7000/education.com/backend/api/v1/login/${values.email}/${values.password}`)
+            fetch(`http://192.168.2.107:7000/education.com/backend/api/v1/login/${values.email}/${values.password}`)
             .then(async(response) => {
-              const resJSON = await response.json()
+              let resJSON = await response.json()
               if(resJSON.success === true) {
-                alert("Login Succesful")
-                AsyncStorage.setItem('user', JSON.stringify(resJSON))
-                navigation.navigate("Home")
+                // alert("Login Succesful")
+                 const userData = await setUser('user',resJSON);
+                 const tempUser = AsyncStorage.getItem("user").then((res) => { 
+                    const response = JSON.parse(res)
+                    const { _id } = response.info
+                    setCurrentUser(_id)
+                    console.warn(_id)
+                 })
               }
               else{
                   alert("Username or Password is incorrect")
