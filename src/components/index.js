@@ -6,6 +6,7 @@ import LayoutComp from "./layout"
 import UserDrawerComp from "./customDrawer"
 import  AdminDrawerComp  from "./adminDrawer";
 import  IconCard  from "./iconCard";
+import  NotificationCard  from "./notificationCard";
 
 export {
     ButtonComp,
@@ -15,5 +16,6 @@ export {
     LayoutComp,
     UserDrawerComp,
     AdminDrawerComp,
-    IconCard
+    IconCard,
+    NotificationCard
 }

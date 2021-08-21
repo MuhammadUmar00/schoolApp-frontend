@@ -8,11 +8,13 @@ import ReadScreen from './readScreen'
 import AdminLogin from './loginAdmin'
 import AddCourse from './admin/addCourse'
 import Dashboard from './admin/dashboard'
+import AddNotification from './admin/addNotification'
 import Splash from './splash'
 import ViewPDF from './viewPdf'
 import Chat from './chat'
 import CardDetails from './payment2'
 import AskForPayment from './payment1'
+import Notifications from './notifcations'
 
 export {
     Home,
@@ -29,5 +31,7 @@ export {
     ViewPDF,
     Chat,
     CardDetails,
-    AskForPayment
+    AskForPayment,
+    Notifications,
+    AddNotification
 }
