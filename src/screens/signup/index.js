@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TextInput, TouchableOpacity, Dimensions } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Dimensions, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, ScrollView } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Formik } from 'formik'
@@ -65,9 +65,12 @@ export default function Signup({ navigation }) {
 
     return (
         <View style={signupStyles.container}>
+           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <KeyboardAvoidingView>
+                    <ScrollView style={{width: WIDTH}} contentContainerStyle={{alignItems: 'center',justifyContent:'center'}}>
             <Formik
                 validationSchema={signupSchema}
-                initialValues={{ name: 'nabeel', email: 'nabeel@gmail.com', phone: '03123456789', password: '1234567',type:'user' }}
+                initialValues={{ name: '', email: '', phone: '', password: '',type:'user' }}
                 onSubmit={(values,actions) => {
                     signup(values)
                  //alert(JSON.stringify(values))
@@ -149,7 +152,9 @@ export default function Signup({ navigation }) {
                     }
                 }
             </Formik>
-
+            </ScrollView>
+            </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
         </View>
     )
 }

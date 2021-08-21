@@ -34,15 +34,15 @@ export const dummyStyles = StyleSheet.create({
     },
     modalcontainer: {
       flex: 1,
-      backgroundColor: '#000000aa'
+      backgroundColor: '#000000aa',
+      justifyContent: 'flex-end'
     },
     modalbody:{
-      position: 'absolute',
-      top: '65%',
       backgroundColor: 'white',
-      height: '35%',
+      height: '25%',
       width: '100%',
-      alignItems: 'center'
+      alignItems: 'center',
+      justifyContent: 'center'
     
     },
   });

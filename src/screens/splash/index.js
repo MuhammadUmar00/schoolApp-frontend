@@ -11,8 +11,9 @@ export default function Splash({ navigation }) {
        function getUser() {
               AsyncStorage.getItem("user").then((res) => {
                      const response = JSON.parse(res)
-                     setUser(response.info)
-                     if (user !== null && user.type === "admin") {
+                     const currentUser = response.info
+                     navigation.navigate("HomeDrawer")
+                     if (currentUser !== null && currentUser.type === "admin") {
                             navigation.navigate("AdminDrawer")
                      }
                      else {
@@ -22,7 +23,7 @@ export default function Splash({ navigation }) {
        }
 
        useEffect(() => {
-              setTimeout(getUser, 3000)
+              setTimeout(getUser, 2000)
        }, [])
 
        return (

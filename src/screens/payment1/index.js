@@ -8,7 +8,9 @@ import { styles } from './paymentStyles'
 const HEIGHT = Dimensions.get('screen').height
 const WIDTH = Dimensions.get('screen').width
 
-export default function AskForPayment({ navigation }) {
+export default function AskForPayment({ navigation, route }) {
+
+const item = route.params
 
     return (
         <View style={styles.container}>
@@ -17,9 +19,9 @@ export default function AskForPayment({ navigation }) {
                 Please Enter your Payment details
             </Text>
             <View style={styles.circle}>
-            <FontAwesome5 name="money-check-alt" size={150} color="white" />
+                <FontAwesome5 name="money-check-alt" size={150} color="white" />
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Payment2",item)}>
                 <ButtonComp
                     title="Enter Payment Details"
                     width={WIDTH * 0.9}

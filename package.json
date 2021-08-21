@@ -43,7 +43,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
-    "native-base": "^3.0.0-next.40"
+    "native-base": "^3.0.0-next.40",
+    "react-native-credit-card-input": "^0.4.1"
   },
   "private": true
 }

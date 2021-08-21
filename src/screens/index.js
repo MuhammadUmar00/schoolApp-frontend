@@ -11,6 +11,8 @@ import Dashboard from './admin/dashboard'
 import Splash from './splash'
 import ViewPDF from './viewPdf'
 import Chat from './chat'
+import CardDetails from './payment2'
+import AskForPayment from './payment1'
 
 export {
     Home,
@@ -26,4 +28,6 @@ export {
     Splash,
     ViewPDF,
     Chat,
+    CardDetails,
+    AskForPayment
 }

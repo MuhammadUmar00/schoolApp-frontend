@@ -19,30 +19,30 @@ export default function AddCourse({ navigation }) {
 
     const pickDocument = async () => {
         let result = await DocumentPicker.getDocumentAsync({
-            type: "application/pdf", 
+            type: "application/pdf",
             copyToCacheDirectory: false
             // type: "application/pdf" // .pdf
         });
 
         console.log(typeof result)
 
-        const uri = FileSystem.documentDirectory+result.name;
+        const uri = FileSystem.documentDirectory + result.name;
 
         await FileSystem.copyAsync({
-        from: result.uri,
-        to: uri
+            from: result.uri,
+            to: uri
         })
 
         // let { uri } = result;
-        let fileName = uri.split('/')[uri.split('/').length-1];
-        let fileType = fileName.split('.')[fileName.split('.').length-1];
-        let fileUri = uri 
-        
+        let fileName = uri.split('/')[uri.split('/').length - 1];
+        let fileType = fileName.split('.')[fileName.split('.').length - 1];
+        let fileUri = uri
+
         let fileToUpload = {
-        name: fileName,
-        uri:  fileUri,
-        type: "application/"+fileType,
-        // size: size,
+            name: fileName,
+            uri: fileUri,
+            type: "application/" + fileType,
+            // size: size,
         };
 
         console.log(fileToUpload, '...............file')
@@ -67,7 +67,7 @@ export default function AddCourse({ navigation }) {
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
-                    'Content-Type': "multipart/form-data",    
+                    'Content-Type': "multipart/form-data",
                 },
                 body: form
             });
@@ -80,7 +80,7 @@ export default function AddCourse({ navigation }) {
 
     async function getCategories() {
         try {
-            const response = await fetch('http://192.168.2.107:7000/education.com/backend/api/v1/users/get/category');
+            const response = await fetch('http://192.168.2.107:7000/education.com/backend/api/v1/users/get/category');             
             const json = await response.json();
             setCategorie(json.category);
             console.log(categorie)
@@ -116,9 +116,9 @@ export default function AddCourse({ navigation }) {
                         <Formik
                             validationSchema={addCourseSchema}
                             initialValues={{ name: '', categorie: '', subcategorie: '' }}
-                            onSubmit={async(values, actions) => {
-                                upload(values, courseFile, 
-`http://192.168.2.107:7000/education.com/backend/api/v1/addCourse/sdfsdf/asdasdasd`)
+                            onSubmit={async (values, actions) => {
+                                upload(values, courseFile,
+                                    `http://192.168.2.107:7000/education.com/backend/api/v1/addCourse/${values.categorie}/${values.subcategorie}`)
                                 // actions.resetForm()
                             }
                             }>

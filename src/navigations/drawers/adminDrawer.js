@@ -9,7 +9,9 @@ import {
     AddCourse,
     Dashboard,
     ViewPDF,
-    Chat
+    Chat,
+    CardDetails,
+    AskForPayment
 } from '../../screens';
 import LayOut  from '../../components/layout';
 import  { AdminDrawerComp }  from '../../components/adminDrawer';
@@ -30,6 +32,8 @@ export default function AdminDrawer() {
                 <Drawer.Screen name="ViewPDF" component={ViewPDF} options={{headerShown:false}} />
                 <Drawer.Screen name="HomeDrawer" component={HomeDrawer} options={{headerShown:false}} />
                 <Drawer.Screen name="Chat" component={Chat} options={{headerShown:false}} />
+                <Drawer.Screen name="Payment1" component={AskForPayment} options={{headerShown:false}} />
+                <Drawer.Screen name="Payment2" component={CardDetails} options={{headerShown:false}} />
             </Drawer.Navigator>
     );
 }
