@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect} from "react";
 import {
   View,
   Text,
@@ -16,47 +16,47 @@ import { StatusBar } from "expo-status-bar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { ButtonComp } from "../../components";
+import { ButtonComp } from "../../../components";
 import { loginStyles } from "./loginStyles";
 import { http } from "@services";
 
 const HEIGHT = Dimensions.get("screen").height;
 const WIDTH = Dimensions.get("screen").width;
 
-export default function Login({ navigation }) {
-  const loginSchema = yup.object({
-    email: yup
-      .string()
-      .required()
-      .test(
-        "Email",
-        "Email must fullfill the requirement example abc@gmail.com",
-        (val) => {
-          return new RegExp(
-            /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/gim
-          ).test(val);
-        }
-      ),
-    password: yup.string().required().min(6),
-  });
+const loginSchema = yup.object({
+  email: yup
+    .string()
+    .required()
+    .test(
+      "Email",
+      "Email must fullfill the requirement example abc@gmail.com",
+      (val) => {
+        return new RegExp(
+          /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/gim
+        ).test(val);
+      }
+    ),
+  password: yup.string().required().min(6),
+});
 
-  const [currentUser, setCurrentUser] = useState(null);
-
-  async function login(values, actions) {
-    const url = `login/${values.email}/${values.password}`;
+export default function AdminLogin({ navigation }) {
+  
+  async function adminLogin(values, actions) {
+    
+    const url = `adminLogin/${values.email}/${values.password}`;
 
     const response = await http(url);
 
     if (response?.success) {
+
       // console.log(response);
 
       await AsyncStorage.setItem("user", JSON.stringify(response.info));
 
-      setCurrentUser(response.info._id);
-
       actions.resetForm();
 
-      navigation.navigate("Home");
+      navigation.navigate("Admin");
+
     } else {
       alert(response);
     }
@@ -94,13 +94,16 @@ export default function Login({ navigation }) {
             <StatusBar style="dark" />
             <Formik
               validationSchema={loginSchema}
-              initialValues={{ email: "nabeel@gmail.com", password: "1234567" }}
-              onSubmit={login}
+              initialValues={{
+                email: "paulboat58@gmail.com",
+                password: "@paulboat024",
+              }}
+              onSubmit={adminLogin}
             >
               {(props) => {
                 return (
                   <>
-                    <Text style={loginStyles.heading}>Log In</Text>
+                    <Text style={loginStyles.heading}>Admin LogIn</Text>
                     <TextInput
                       style={loginStyles.input}
                       placeholder="Email"
@@ -135,22 +138,12 @@ export default function Login({ navigation }) {
                         borderRadius={8}
                       />
                     </TouchableOpacity>
-                    <View style={loginStyles.text}>
-                      <Text style={loginStyles.donthave}>
-                        Don't have an accout?...
-                      </Text>
-                      <TouchableOpacity
-                        onPress={() => navigation.navigate("Signup")}
-                      >
-                        <Text style={loginStyles.signup}>Sign Up</Text>
-                      </TouchableOpacity>
-                    </View>
                     <TouchableOpacity
-                      onPress={() => navigation.navigate("AdminLogin")}
+                      onPress={() => navigation.navigate("Login")}
                       style={loginStyles.loginAsAdmin}
                     >
                       <ButtonComp
-                        title="Login as Admin"
+                        title="Login as User"
                         width={WIDTH * 0.4}
                         height={HEIGHT * 0.06}
                         color="#fff"

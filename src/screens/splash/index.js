@@ -1,34 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { View, Image } from 'react-native'
-import { useFocusEffect } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { styles } from './splashStyles'
+import React, { useEffect, useState } from "react";
+import { View, Image } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { styles } from "./splashStyles";
 
 export default function Splash({ navigation }) {
+  const [user, setUser] = useState('');
 
-       const [user, setUser] = useState("")
+  async function getUser() {
+    let currentUser = await AsyncStorage.getItem("user");
 
-       function getUser() {
-              AsyncStorage.getItem("user").then((res) => {
-                     const response = JSON.parse(res)
-                     const currentUser = response.info
-                     navigation.navigate("HomeDrawer")
-                     if (currentUser !== null && currentUser.type === "admin") {
-                            navigation.navigate("AdminDrawer")
-                     }
-                     else {
-                            navigation.navigate("HomeDrawer")
-                     }
-              })
-       }
+    currentUser = JSON.parse(currentUser);
 
-       useEffect(() => {
-              setTimeout(getUser, 2000)
-       }, [])
+    // console.log(currentUser.info.type)
 
-       return (
-              <View style={styles.container}>
-                     <Image style={styles.image} source={require('../../../assets/edu-logo.png')} />
-              </View>
-       );
+    if(currentUser && currentUser?.type === "admin") navigation.navigate("AdminDrawer"); 
+    else navigation.navigate("HomeDrawer"); 
+       
+  }
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      setTimeout(getUser, 500);
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  return (
+    <View style={styles.container}>
+      <Image
+        style={styles.image}
+        source={require("../../../assets/edu-logo.png")}
+      />
+    </View>
+  );
 }

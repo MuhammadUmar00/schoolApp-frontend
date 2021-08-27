@@ -13,7 +13,8 @@ import {
     ViewPDF,
     Chat,
     CardDetails,
-    AskForPayment
+    AskForPayment,
+    Notifications
 } from '../../screens';
 import LayOut from '../../components/layout';
 import { UserDrawerComp } from '../../components/customDrawer';
@@ -24,7 +25,9 @@ const Drawer = createDrawerNavigator();
 
 export default function UserDrawer() {
     return (
-            <Drawer.Navigator initialRouteName="Home" drawerContent={(props) => <UserDrawerComp {...props} />}>
+            <Drawer.Navigator initialRouteName="Home" 
+            drawerContent={(props) => <UserDrawerComp {...props} />}            
+            >
                 <Drawer.Screen name="Home" component={Home} options={{ headerShown: false }} />
                 <Drawer.Screen name="List" component={ListScreen} options={{ headerShown: false }} />
                 <Drawer.Screen name="Boxes" component={DummyScreen} options={{ headerShown: false }} />
@@ -39,6 +42,7 @@ export default function UserDrawer() {
                 <Drawer.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
                 <Drawer.Screen name="Payment1" component={AskForPayment} options={{headerShown:false}} />
                 <Drawer.Screen name="Payment2" component={CardDetails} options={{headerShown:false}} />
+                <Drawer.Screen name="Notifications" component={Notifications} options={{headerShown:false}} />
             </Drawer.Navigator>
     );
 }

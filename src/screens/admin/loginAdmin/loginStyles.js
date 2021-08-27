@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from "react-native";
 const WIDTH = Dimensions.get("screen").width;
 const HEIGHT = Dimensions.get("screen").height;
 
-export const styles = StyleSheet.create({
+export const loginStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
@@ -22,18 +22,11 @@ export const styles = StyleSheet.create({
     borderColor: "#128da5",
     borderWidth: 1.5,
     marginVertical: HEIGHT * 0.01,
-    minHeight: HEIGHT * 0.06,
+    height: HEIGHT * 0.06,
     borderRadius: 8,
     backgroundColor: "hsla(190, 80%, 36%, 0.08)",
     paddingHorizontal: "5%",
     color: "#128da5",
-  },
-  errtext: {
-    color: "crimson",
-    alignSelf: "center",
-    fontSize: 9.5,
-    fontWeight: "bold",
-    fontFamily: "monospace",
   },
   text: {
     flexDirection: "row",
@@ -51,5 +44,12 @@ export const styles = StyleSheet.create({
     alignSelf: "flex-end",
     position: "absolute",
     top: 0,
+  },
+  errtext: {
+    color: "crimson",
+    alignSelf: "center",
+    fontSize: 9.5,
+    fontWeight: "bold",
+    fontFamily: "monospace",
   },
 });
