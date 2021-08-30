@@ -52,7 +52,7 @@ export default function Login({ navigation }) {
 
       await AsyncStorage.setItem("user", JSON.stringify(response.info));
 
-      setCurrentUser(response.info._id);
+      setCurrentUser(response.info);
 
       actions.resetForm();
 
