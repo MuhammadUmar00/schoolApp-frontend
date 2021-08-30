@@ -15,6 +15,8 @@ import Chat from './chat'
 import CardDetails from './payment2'
 import AskForPayment from './payment1'
 import Notifications from './notifcations'
+import Extras from './extras'
+import AddExtras from './admin/addExtras'
 
 export {
     Home,
@@ -33,5 +35,7 @@ export {
     CardDetails,
     AskForPayment,
     Notifications,
-    AddNotification
+    AddNotification,
+    Extras,
+    AddExtras
 }

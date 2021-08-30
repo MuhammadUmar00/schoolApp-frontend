@@ -12,6 +12,8 @@ import {
   CardDetails,
   AskForPayment,
   AddNotification,
+  Extras,
+  AddExtras
 } from "../../screens";
 import LayOut from "../../components/layout";
 import { AdminDrawerComp } from "../../components/adminDrawer";
@@ -68,6 +70,16 @@ export default function AdminDrawer() {
       <Drawer.Screen
         name="ViewPDF"
         component={ViewPDF}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+        name="Extras"
+        component={Extras}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+        name="AddExtras"
+        component={AddExtras}
         options={{ headerShown: false }}
       />
       {/* <Drawer.Screen

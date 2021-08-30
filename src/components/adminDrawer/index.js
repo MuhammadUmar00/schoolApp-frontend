@@ -17,7 +17,10 @@ import { styles } from "./adminDrawerStyles";
 import { http } from "@services";
 
 export function AdminDrawerComp(props) {
+
   const [categories, setCategories] = useState('');
+
+  const [user, setUser] = useState(null);
 
   const [bottomList, setBottomList] = useState([
     { name: "School", icon: "book", key: "1" },
@@ -36,14 +39,24 @@ export function AdminDrawerComp(props) {
     if (response?.category) setCategories(response.category);
   }
 
+  async function getUser() {
+    let savedUser = await AsyncStorage.getItem("user");
+    savedUser = JSON.parse(savedUser);
+    console.log(savedUser, "YEH USER")
+    setUser(savedUser);
+  }
+
   useEffect(() => {
     getCategories();
+    getUser();
   }, []);
 
   function logOut() {
     AsyncStorage.clear();
-    props.navigation.navigate("Login");
+    setUser(null);
+    props.navigation.navigate('Login');
   }
+  
 
   return (
     <View style={{ flex: 1 }}>
@@ -77,7 +90,7 @@ export function AdminDrawerComp(props) {
                         <Entypo name={item.icon} color="#128da5" size={25} />
                       )}
                       label={item.name}
-                      onPress={() => props.navigation.navigate("List", item)}
+                      onPress={() => item.name === "Extras" ? props.navigation.navigate("Extras") : props.navigation.navigate("List", item)}
                     />
                   );
                 })}
@@ -106,6 +119,15 @@ export function AdminDrawerComp(props) {
                   props.navigation.navigate("AddCourse");
                 }}
               />
+              <DrawerItem
+                icon={() => (
+                  <Ionicons name="add-circle-sharp" color="#128da5" size={24} />
+                )}
+                label="Add New Extra"
+                onPress={() => {
+                  props.navigation.navigate("AddExtras");
+                }}
+              />
             </View>
 
             <View style={styles.homeView}>
@@ -121,13 +143,21 @@ export function AdminDrawerComp(props) {
             </View>
 
             <View style={styles.homeView}>
+            {user === null ?
+            <DrawerItem
+              icon={() => (
+                <FontAwesome name="sign-out" color="#128da5" size={20} />
+              )}
+              label="Log in"
+              onPress={() => props.navigate.navigate("Login")}
+            /> :
             <DrawerItem
               icon={() => (
                 <FontAwesome name="sign-out" color="#128da5" size={20} />
               )}
               label="Log Out"
               onPress={logOut}
-            />
+            /> }
             </View>
           </Drawer.Section>
         </View>

@@ -22,10 +22,11 @@ import { http } from "@services";
 const WIDTH = Dimensions.get("screen").width;
 const HEIGHT = Dimensions.get("screen").height;
 
-export default function AddCourse({ navigation }) {
+export default function AddExtras({ navigation }) {
   const [categorie, setCategorie] = useState('');
   const [subCategorie, setSubCategorie] = useState('');
   const [courseFile, setCourseFile] = useState(null);
+
   const addCourseSchema = yup.object({
     name: yup.string().required(),
   });
@@ -67,14 +68,14 @@ export default function AddCourse({ navigation }) {
 
     const form = new FormData();
 
-    form.append("courseFile", courseFile);
+    form.append("extrasFile", courseFile);
     form.append("name", values.name);
 
     // Object.entries(values).forEach((entry) => {
     //   form.append(entry[0], entry[1]);
     // });
 
-    const url = `addCourse/${values.categorie}/${values.subcategorie}`;
+    const url = `addExtras`;
 
     const options = {
       method: "POST",
@@ -89,44 +90,19 @@ export default function AddCourse({ navigation }) {
     // console.log(response, "response");
 
     if (response) {
-      ToastAndroid.show('course added successfully', ToastAndroid.SHORT);
+      ToastAndroid.show('extra added successfully', ToastAndroid.SHORT);
       actions.resetForm();
     }
   }
 
-  async function getCategories() {
-    const url = `users/get/category`;
-
-    const response = await http(url);
-
-    // console.log(response, 'Categories');
-
-    if (response?.category) setCategorie(response.category);
-  }
-
-  async function getSubCategories() {
-    const url = `users/get/all-sub-categorie`;
-
-    const response = await http(url);
-
-    // console.log(response, 'Sub-Categories');
-
-    if (response?.subCategories) setSubCategorie(response.subCategories);
-  }
-
-  useEffect(() => {
-    getCategories();
-    getSubCategories();
-  }, []);
-
   return (
     <KeyboardAvoidingView>
       <ScrollView>
-        <LayoutComp navigation={navigation} title="Add New Course">
+        <LayoutComp navigation={navigation} title="Add Extras">
           <View style={addCousreStyles.form}>
             <Formik
               validationSchema={addCourseSchema}
-              initialValues={{ name: "", categorie: "", subcategorie: "" }}
+              initialValues={{ name: "" }}
               onSubmit={upload}
             >
               {(props) => {
@@ -134,72 +110,11 @@ export default function AddCourse({ navigation }) {
                   <>
                     <TextInput
                       style={addCousreStyles.input}
-                      placeholder="Course Name"
+                      placeholder="Name"
                       placeholderTextColor="#128da5"
                       value={props.values.name}
                       onChangeText={props.handleChange("name")}
                     />
-                    {categorie !== "" && (
-                      <Select
-                        selectedValue={categorie}
-                        minWidth="80%"
-                        height={HEIGHT * 0.065}
-                        color="#128da5"
-                        backgroundColor="hsla(190, 80%, 36%, 0.08)"
-                        paddingLeft="5%"
-                        paddingRight="5%"
-                        borderColor="#128da5"
-                        marginTop={HEIGHT * 0.015}
-                        marginBottom={HEIGHT * 0.015}
-                        borderWidth={1.5}
-                        value={props.values.categorie}
-                        onValueChange={props.handleChange("categorie")}
-                        placeholder="Categorie"
-                        placeholderTextColor="#128da5"
-                      >
-                        {
-                          categorie?.map((item, index) => (
-                            <Select.Item
-                              key={`${index}`}
-                              key={item.key}
-                              label={item.name}
-                              value={item._id}
-                            />
-                          ))
-                          //<Select.Item key='kuch bhi' label='kuch bhi' value='kuch bhi' />
-                        }
-                      </Select>
-                    )}
-                    {subCategorie !== "" && (
-                      <Select
-                        selectedValue={subCategorie}
-                        minWidth="80%"
-                        height={HEIGHT * 0.065}
-                        color="#128da5"
-                        backgroundColor="hsla(190, 80%, 36%, 0.08)"
-                        paddingLeft="5%"
-                        paddingRight="5%"
-                        borderColor="#128da5"
-                        marginTop={HEIGHT * 0.015}
-                        marginBottom={HEIGHT * 0.015}
-                        borderWidth={1.5}
-                        value={props.values.subcategorie}
-                        onValueChange={props.handleChange("subcategorie")}
-                        placeholder="Sub Categorie"
-                        placeholderTextColor="#128da5"
-                      >
-                        {
-                          subCategorie?.map((item, index) => (
-                            <Select.Item
-                              key={`${index}`}
-                              label={item.name}
-                              value={item._id}
-                            />
-                          ))
-                          //  <Select.Item key='kuch bhi' label='kuch bhi' value='kuch bhi' />
-                        }
-                      </Select>
-                    )}
                     <View style={addCousreStyles.courseFile}>
                       <Text style={addCousreStyles.courseFileText}>
                         Course File

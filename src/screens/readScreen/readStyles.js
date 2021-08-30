@@ -77,6 +77,22 @@ export const readStyles = StyleSheet.create({
 
         elevation: 5,
     },
+    card3: {
+        width: '90%',
+        borderRadius: 10,
+        justifyContent: 'center',
+        height: HEIGHT * 0.1,
+        backgroundColor: "#fff",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+    },
     textDiv:{
         flexDirection: 'row',
         alignItems: 'baseline',

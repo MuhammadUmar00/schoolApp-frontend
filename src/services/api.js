@@ -1,12 +1,13 @@
-import {DEV_BASE_URL, PROD_BASE_URL} from '@constants'
+import { BASE_URL } from '@constants'
 
 const http = async (url, options) => {
+  console.log(`${BASE_URL}/${url}`);
   try {
     let response 
     
-    if(!options) response = await fetch(`${DEV_BASE_URL}/${url}`);
+    if(!options) response = await fetch(`${BASE_URL}/${url}`);
 
-    if(options) response = await fetch(`${DEV_BASE_URL}/${url}`, options);
+    if(options) response = await fetch(`${BASE_URL}/${url}`, options);
 
     response = await response?.json();
 

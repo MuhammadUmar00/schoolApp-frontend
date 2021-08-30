@@ -11,12 +11,14 @@ import { ButtonComp } from "../../components";
 import { readStyles } from "./readStyles";
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import { download } from "@services"
 
 const WIDTH = Dimensions.get("screen").width;
 const HEIGHT = Dimensions.get("screen").height;
 
 export default function ReadScreen({ route, navigation }) {
   const screenDetails = route.params;
+  // console.log(screenDetails.file)
 
   return (
     <View style={readStyles.container}>
@@ -49,6 +51,21 @@ export default function ReadScreen({ route, navigation }) {
             width={WIDTH * 0.7}
             height={HEIGHT * 0.05}
             title="Read"
+            borderRadius={50}
+            color="#fff"
+            backgroundColor="#128da5"
+          />
+        </TouchableOpacity>
+      </View>
+      <View style={readStyles.card3}>
+        <TouchableOpacity
+          onPress={() => download(screenDetails.file)}
+          style={{ alignSelf: "center" }}
+        >
+          <ButtonComp
+            width={WIDTH * 0.7}
+            height={HEIGHT * 0.05}
+            title="Download"
             borderRadius={50}
             color="#fff"
             backgroundColor="#128da5"

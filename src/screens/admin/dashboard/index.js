@@ -103,7 +103,7 @@ export default function Dashboard({ navigation }) {
             <>
               <TouchableOpacity
                 activeOpacity={0.9}
-                onPress={() => navigation.navigate("List", item)}
+                onPress={() => item.name === "Extras" ? navigation.navigate("Extras") : navigation.navigate("List", item)}
               >
                 <HorizontalCard
                   item={item}

@@ -2,10 +2,12 @@ import * as Permissions from "expo-permissions";
 import * as MediaLibrary from "expo-media-library";
 import * as FileSystem from "expo-file-system";
 import { ToastAndroid } from "react-native";
+import { BASE_URL } from "@constants";
 
 export async function download(url) {
-   // const uri = 'http://192.168.0.100:7000/education.com/backend/api/v1/uploads/YesYO-App-Feature-wishlist-May-2021(2).pdf.pdf'
-  //     "http://192.168.0.100:7000/education.com/backend/api/v1/uploads/YesYO-App-Feature-wishlist-May-2021%20(2).pdf.pdf";
+  //   const uri = `${BASE_URL}/${url}`
+    // const uri = `http://192.168.2.107:7000/${url}`
+    const uri = `${BASE_URL}/${url}`;
 
   const filename = uri.split("/")[uri.split("/").length - 1];
   const fileUri = `${FileSystem.documentDirectory}${filename}`;

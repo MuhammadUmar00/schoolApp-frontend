@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "This is an educational application using React-Native Expo ",
+    "githubUrl": "https://github.com/MuhammadUmar00/schoolApp-frontend.git"
   }
 }

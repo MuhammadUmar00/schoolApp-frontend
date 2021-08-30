@@ -18,10 +18,7 @@ import { http } from "@services";
 const WIDTH = Dimensions.get("screen").width;
 const HEIGHT = Dimensions.get("screen").height;
 
-export default function DummyScreen({ route, navigation }) {
-  const screenDetails = route.params;
-
-  console.log(screenDetails, 'sc hai')
+export default function Extras({ route, navigation }) {
 
   const [item, setItem] = useState('');
 
@@ -45,20 +42,11 @@ export default function DummyScreen({ route, navigation }) {
     setUser(savedUser);
   }
 
-  async function getCourses() {
-    
-    console.log(user), "asdasdasdasdasdasdasdasd";
-    getUser()
+  async function getExtras() {
+
     let url;
-   
-    if (user !== null && screenDetails.catId === "611ad8557ecf4a0d3cdc76db") {
-      url = `users/get/getPaidCourse/${user?._id}/${screenDetails._id}`
-      console.log(`users/get/getPaidCourse/${user?._id}/${screenDetails._id}`, 'ye call huwi hai')
-    }
-    // else {
-    //   url = `users/get/getCourse/${screenDetails._id}`
-    //   console.log(`users/get/getCourse/${screenDetails._id}`, "ye call huwi hai")
-    // }
+
+    url = `users/get/extras`
 
     const response = await http(url);
 
@@ -79,7 +67,7 @@ export default function DummyScreen({ route, navigation }) {
     if (response?.success) {
       setModal(false);
       ToastAndroid.show(response.message, ToastAndroid.SHORT);
-      await getCourses();
+      await getExtras();
     }
 
     else {
@@ -91,15 +79,9 @@ export default function DummyScreen({ route, navigation }) {
 
   useEffect(() => {
     getUser();
-    getCourses();
+    getExtras();
   }, []);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      getUser()
-      getCourses();
-    }, [screenDetails._id])
-  );
 
   function openModal(item) {
     if (user !== null && user.type === "admin") {
@@ -109,7 +91,7 @@ export default function DummyScreen({ route, navigation }) {
   }
 
   return (
-    <LayoutComp navigation={navigation} title={`${screenDetails.name}`}>
+    <LayoutComp navigation={navigation} title="Extras">
       <StatusBar style="dark" />
       <View style={dummyStyles.listCont}>
         <FlatList
@@ -118,35 +100,19 @@ export default function DummyScreen({ route, navigation }) {
           numColumns={2}
           renderItem={({ item }) => {
             item.key = `${item._id}`;
-            if (user?.type !== "admin" && item.categorieId == '611ad8557ecf4a0d3cdc76db') {
-              return (
-                <TouchableOpacity
-                  onLongPress={() => openModal(item)}
-                  onPress={() => navigation.navigate("Payment1", item)}
-                  activeOpacity={0.9}
-                >
-                  <VerticalCard
-                    height={HEIGHT * 0.25}
-                    width={WIDTH * 0.4}
-                    item={item}
-                  />
-                </TouchableOpacity>
-              );
-            } else {
-              return (
-                <TouchableOpacity
-                  onLongPress={() => openModal(item)}
-                  onPress={() => navigation.navigate("Read", item)}
-                  activeOpacity={0.9}
-                >
-                  <VerticalCard
-                    height={HEIGHT * 0.25}
-                    width={WIDTH * 0.4}
-                    item={item}
-                  />
-                </TouchableOpacity>
-              );
-            }
+            return (
+              <TouchableOpacity
+                onLongPress={() => openModal(item)}
+                onPress={() => navigation.navigate("Read", item)}
+                activeOpacity={0.9}
+              >
+                <VerticalCard
+                  height={HEIGHT * 0.25}
+                  width={WIDTH * 0.4}
+                  item={item}
+                />
+              </TouchableOpacity>
+            )
           }}
         />
       </View>

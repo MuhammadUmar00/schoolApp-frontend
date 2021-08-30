@@ -19,15 +19,19 @@ import {
   CardDetails,
   Notifications, // user
   AddNotification, // admin
+  Extras,
+  AddExtras
 } from "./src/screens";
 import AskForPayment from "./src/screens/payment1";
 import {_handleDisableYellowBoxWarnings} from "@services"
 
 
 export default function App() {
+ 
   useEffect(()=>{
     _handleDisableYellowBoxWarnings();
   },[])
+
   return (
     <NativeBaseProvider>
       <MainStack/>

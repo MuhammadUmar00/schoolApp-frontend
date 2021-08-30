@@ -14,7 +14,8 @@ import {
     Chat,
     CardDetails,
     AskForPayment,
-    Notifications
+    Notifications,
+    Extras
 } from '../../screens';
 import LayOut from '../../components/layout';
 import { UserDrawerComp } from '../../components/customDrawer';
@@ -43,6 +44,7 @@ export default function UserDrawer() {
                 <Drawer.Screen name="Payment1" component={AskForPayment} options={{headerShown:false}} />
                 <Drawer.Screen name="Payment2" component={CardDetails} options={{headerShown:false}} />
                 <Drawer.Screen name="Notifications" component={Notifications} options={{headerShown:false}} />
+                <Drawer.Screen name="Extras" component={Extras} options={{headerShown:false}} />
             </Drawer.Navigator>
     );
 }
