@@ -1,7 +1,6 @@
 import { BASE_URL } from '@constants'
 
 const http = async (url, options) => {
-  console.log(`${BASE_URL}/${url}`);
   try {
     let response 
     

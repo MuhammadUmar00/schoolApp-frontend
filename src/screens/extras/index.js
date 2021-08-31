@@ -56,7 +56,7 @@ export default function Extras({ route, navigation }) {
   }
 
   async function deleteCourses() {
-    const url = `courses/delete/course/${item._id}`;
+    const url = `delete/extra/${item._id}`;
 
     const options = { method: "DELETE" };
 
@@ -97,9 +97,9 @@ export default function Extras({ route, navigation }) {
         <FlatList
           style={dummyStyles.list}
           data={courses}
+          keyExtractor={(item) => String(item._id)}
           numColumns={2}
           renderItem={({ item }) => {
-            item.key = `${item._id}`;
             return (
               <TouchableOpacity
                 onLongPress={() => openModal(item)}

@@ -7,6 +7,7 @@ import { styles } from './paymentStyles'
 import PayStack from "../../services/paystack";
 import {download} from "@services";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { http } from "@services";
 
 const HEIGHT = Dimensions.get('screen').height
 const WIDTH = Dimensions.get('screen').width
@@ -38,7 +39,7 @@ export default function AskForPayment({ navigation, route }) {
 
     async function onSuccess() {
         setMakePayment(false);
-         alert("success");
+        createReciept()
          navigation.navigate("Read", item)
         //  await download('');
     }
@@ -51,6 +52,18 @@ export default function AskForPayment({ navigation, route }) {
     useEffect(() => {
         getUser();
     }, []);
+
+    async function createReciept() {
+          const url = `user/add/reciept`;
+          const options = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({subCategorieId: item.subCategorieId, isPaid: true, courseId: item._id, userId: user._id }),
+          };
+          const response = await http(url, options);
+    
+          if (response) alert("Success");
+        }
 
 
     return (

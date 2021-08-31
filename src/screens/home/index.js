@@ -152,7 +152,7 @@ export default function Home({ navigation }) {
         <FlatList
           data={categories}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(item) => item._id}
+          keyExtractor={(item) => String(item._id)}
           renderItem={({ item, index }) => {
             item.icon = bottomList[index].icon;
             return (

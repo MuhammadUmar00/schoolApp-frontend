@@ -56,8 +56,6 @@ export default function AddCourse({ navigation }) {
       // size: size,
     };
 
-    console.log(fileToUpload, "...............file");
-
     setCourseFile(fileToUpload);
   }
 

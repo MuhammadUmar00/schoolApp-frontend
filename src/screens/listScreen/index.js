@@ -47,9 +47,9 @@ export default function ListScreen({ route, navigation }) {
         <FlatList
           style={listStyles.list}
           data={subCategories}
+          keyExtractor={(item) => String(item._id)}
           renderItem={({ item, index }) => {
             item.icon = bottomList[index].icon;
-            item.key = item._id;
             return (
               <TouchableOpacity
                 onPress={() => navigation.navigate("Boxes", item)}

@@ -18,16 +18,13 @@ import { http } from "@services";
 const WIDTH = Dimensions.get("screen").width;
 const HEIGHT = Dimensions.get("screen").height;
 
-export default function DummyScreen({ route, navigation }) {
-  const screenDetails = route.params;
-
-  const [item, setItem] = useState('');
+export default function PaidCourses({ route, navigation }) {
 
   const [courses, setCourses] = useState('');
 
   const [modal, setModal] = useState(false);
 
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(null);
 
   const dummyData = [
     { name: "Dummy Data 1", key: "1" },
@@ -40,19 +37,15 @@ export default function DummyScreen({ route, navigation }) {
     let savedUser = await AsyncStorage.getItem("user");
     savedUser = JSON.parse(savedUser);
     setUser(savedUser);
-    await getCourses(savedUser._id)
   }
 
-  async function getCourses(userId) {
-    let url;
+  async function getCourses() {
+    
+    // here the api of paid courses will be called
+    getUser()
+    
+    let url = `/users/get/getPaidCourse/`
    
-    if (user === null || screenDetails._id !== '611ad8557ecf4a0d3cdc76db'){
-      url = `users/get/getCourse/${screenDetails._id}`
-    }
-    else {
-      url = `users/get/getUnPaidCourse/${userId}/${screenDetails._id}`
-    }
-
     const response = await http(url);
 
     // console.log(response, "response")
@@ -60,44 +53,11 @@ export default function DummyScreen({ route, navigation }) {
     if (response?.courses) setCourses(response.courses);
   }
 
-  async function deleteCourses() {
-    const url = `courses/delete/course/${item._id}`;
-
-    const options = { method: "DELETE" };
-
-    // console.log(response);
-
-    const response = await http(url, options);
-
-    if (response?.success) {
-      setModal(false);
-      ToastAndroid.show(response.message, ToastAndroid.SHORT);
-      await getCourses();
-    }
-
-    else {
-      setModal(false);
-      ToastAndroid.show(response.message, ToastAndroid.SHORT);
-    }
-
-  }
-
   useEffect(() => {
     getUser();
+ //   getCourses();
   }, []);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      getUser()
-    }, [screenDetails._id])
-  );
-
-  function openModal(item) {
-    if (user !== null && user.type === "admin") {
-      setModal(true);
-      setItem(item);
-    }
-  }
 
   return (
     <LayoutComp navigation={navigation} title={`${screenDetails.name}`}>
@@ -105,28 +65,13 @@ export default function DummyScreen({ route, navigation }) {
       <View style={dummyStyles.listCont}>
         <FlatList
           style={dummyStyles.list}
-          data={courses}
+          data={dummyData}
           numColumns={2}
-          keyExtractor={(item) => String(item._id)}
           renderItem={({ item }) => {
-            if (user?.type !== "admin" && item.categorieId == '611ad8557ecf4a0d3cdc76db') {
+            item.key = `${item._id}`;
+        
               return (
                 <TouchableOpacity
-                  onLongPress={() => openModal(item)}
-                  onPress={() => navigation.navigate("Payment1", item)}
-                  activeOpacity={0.9}
-                >
-                  <VerticalCard
-                    height={HEIGHT * 0.25}
-                    width={WIDTH * 0.4}
-                    item={item}
-                  />
-                </TouchableOpacity>
-              );
-            } else {
-              return (
-                <TouchableOpacity
-                  onLongPress={() => openModal(item)}
                   onPress={() => navigation.navigate("Read", item)}
                   activeOpacity={0.9}
                 >
@@ -137,7 +82,6 @@ export default function DummyScreen({ route, navigation }) {
                   />
                 </TouchableOpacity>
               );
-            }
           }}
         />
       </View>
