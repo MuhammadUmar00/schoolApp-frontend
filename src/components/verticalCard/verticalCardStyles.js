@@ -30,5 +30,20 @@ export const cardStyles = StyleSheet.create({
          width: '100%',
          borderTopRightRadius: 20,
          borderTopLeftRadius: 20,
+     },
+     badge:{
+       position: 'absolute',
+       top: '0%',
+       left: 0,
+       textAlign: 'center',
+       backgroundColor: 'hsla(137, 100%, 35%, 0.9)',
+       paddingHorizontal: '5%',
+       paddingVertical: '10%',
+       color: '#fff',
+       width: '70%',
+       fontWeight: 'bold',
+       zIndex: 99999,
+       borderRadius: 5,
+       borderTopLeftRadius: 20,
      }
 });

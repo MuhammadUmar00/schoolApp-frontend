@@ -45,8 +45,8 @@ export default function DummyScreen({ route, navigation }) {
 
   async function getCourses(userId) {
     let url;
-   
-    if (user === null || screenDetails._id !== '611ad8557ecf4a0d3cdc76db'){
+
+    if (user === null || screenDetails.catId !== '611ad8557ecf4a0d3cdc76db') {
       url = `users/get/getCourse/${screenDetails._id}`
     }
     else {
@@ -112,8 +112,7 @@ export default function DummyScreen({ route, navigation }) {
             if (user?.type !== "admin" && item.categorieId == '611ad8557ecf4a0d3cdc76db') {
               return (
                 <TouchableOpacity
-                  onLongPress={() => openModal(item)}
-                  onPress={() => navigation.navigate("Payment1", item)}
+                  onPress={() => item.isPaid === true ? navigation.navigate("Read", item) : navigation.navigate("Payment1", item)}
                   activeOpacity={0.9}
                 >
                   <VerticalCard
@@ -123,7 +122,8 @@ export default function DummyScreen({ route, navigation }) {
                   />
                 </TouchableOpacity>
               );
-            } else {
+            }
+             else {
               return (
                 <TouchableOpacity
                   onLongPress={() => openModal(item)}

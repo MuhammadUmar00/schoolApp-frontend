@@ -10,7 +10,7 @@ const http = async (url, options) => {
 
     response = await response?.json();
 
-    if (!response.success) alert("some thing went wrong");
+    // if (!response.success) alert("some thing went wrong");
     // if (!response.success)  console.log("some thing went wrong");
 
     return response;
