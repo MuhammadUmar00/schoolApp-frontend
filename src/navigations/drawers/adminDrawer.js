@@ -13,7 +13,8 @@ import {
   AskForPayment,
   AddNotification,
   Extras,
-  AddExtras
+  AddExtras,
+  Notifications
 } from "../../screens";
 import LayOut from "../../components/layout";
 import { AdminDrawerComp } from "../../components/adminDrawer";
@@ -101,6 +102,11 @@ export default function AdminDrawer() {
         name="Payment2"
         component={CardDetails}
         options={{ headerShown: false }}
+      />
+      <Drawer.Screen 
+      name="Notifications"
+       component={Notifications} 
+       options={{headerShown:false}} 
       />
     </Drawer.Navigator>
   );

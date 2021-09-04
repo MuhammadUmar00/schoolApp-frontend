@@ -40,10 +40,10 @@ const signupSchema = yup.object({
     .required()
     .test(
       "Phone Number",
-      "Phone Number must fullfill the requirement example +92-345-2323322",
+      "Phone Number must fullfill the requirement example 233xxxxxxxx",
       (val) => {
         return new RegExp(
-          /^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}/gim
+          /^(([2][3][3])|[0])?\d{9}$/gim
         ).test(val);
       }
     ),

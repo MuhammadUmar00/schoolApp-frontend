@@ -6,7 +6,7 @@ import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'
 export default function Card({ item, width, height, index }) {
     return (
         <View style={{ ...cardStyles.card, ...{ width, height } }}>
-            {item.name !== "Repair" ?
+            {item.name !== "Repair" && item.name !== "Mail" && item.name !== "WhatsApp"  ?
                 <Feather name={item.icon} size={40} color="white" /> :
                 <MaterialCommunityIcons name={item.icon} size={40} color="white" />
             }

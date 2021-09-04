@@ -54,7 +54,7 @@ export function AdminDrawerComp(props) {
   function logOut() {
     AsyncStorage.clear();
     setUser(null);
-    props.navigation.navigate('Login');
+    props.navigation.navigate("Login")
   }
   
 
@@ -77,6 +77,15 @@ export function AdminDrawerComp(props) {
                 label="Home"
                 onPress={() => {
                   props.navigation.navigate("Home");
+                }}
+              />
+                <DrawerItem
+                icon={() => (
+                  <Ionicons name="notifications-circle-sharp" color="#128da5" size={23} />
+                )}
+                label="Sent Notifications"
+                onPress={() => {
+                  props.navigation.navigate("Notifications");
                 }}
               />
 
@@ -149,7 +158,7 @@ export function AdminDrawerComp(props) {
                 <FontAwesome name="sign-out" color="#128da5" size={20} />
               )}
               label="Log in"
-              onPress={() => props.navigate.navigate("Login")}
+              onPress={() => props.navigation.navigate("Login")}
             /> :
             <DrawerItem
               icon={() => (

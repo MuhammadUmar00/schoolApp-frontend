@@ -59,8 +59,8 @@ export default function AddCourse({ navigation }) {
     setCourseFile(fileToUpload);
   }
 
-  async function upload( values, actions) {
-    
+  async function upload(values, actions) {
+
     // console.log(values);
 
     const form = new FormData();
@@ -152,14 +152,13 @@ export default function AddCourse({ navigation }) {
                         borderWidth={1.5}
                         value={props.values.categorie}
                         onValueChange={props.handleChange("categorie")}
-                        placeholder="Categorie"
+                        placeholder="Category"
                         placeholderTextColor="#128da5"
                       >
                         {
                           categorie?.map((item, index) => (
                             <Select.Item
-                              key={`${index}`}
-                              key={item.key}
+                              key={String(item._id)}
                               label={item.name}
                               value={item._id}
                             />
@@ -183,13 +182,13 @@ export default function AddCourse({ navigation }) {
                         borderWidth={1.5}
                         value={props.values.subcategorie}
                         onValueChange={props.handleChange("subcategorie")}
-                        placeholder="Sub Categorie"
+                        placeholder="Sub Category"
                         placeholderTextColor="#128da5"
                       >
                         {
                           subCategorie?.map((item, index) => (
                             <Select.Item
-                              key={`${index}`}
+                              key={String(item._id)}
                               label={item.name}
                               value={item._id}
                             />

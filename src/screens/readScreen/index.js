@@ -35,14 +35,10 @@ export default function ReadScreen({ route, navigation }) {
       <View style={readStyles.card}>
         <View style={readStyles.textDiv}>
           <Entypo name="calendar" size={24} color="#128da5" />
-          <Text style={readStyles.cardText}>Basic 7 Science</Text>
+          <Text style={readStyles.cardText}>{screenDetails.name}</Text>
         </View>
       </View>
       <View style={readStyles.card2}>
-        <View style={readStyles.textDiv}>
-          <Feather name="clipboard" size={20} color="#128da5" />
-          <Text style={readStyles.cardText2}>All Term</Text>
-        </View>
         <TouchableOpacity
           onPress={() => navigation.navigate("ViewPDF", screenDetails)}
           style={{ alignSelf: "center" }}

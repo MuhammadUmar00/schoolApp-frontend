@@ -95,8 +95,8 @@ export default function AdminLogin({ navigation }) {
             <Formik
               validationSchema={loginSchema}
               initialValues={{
-                email: "paulboat58@gmail.com",
-                password: "@paulboat024",
+                email: "",
+                password: "",
               }}
               onSubmit={adminLogin}
             >

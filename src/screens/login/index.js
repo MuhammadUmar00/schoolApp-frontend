@@ -94,7 +94,7 @@ export default function Login({ navigation }) {
             <StatusBar style="dark" />
             <Formik
               validationSchema={loginSchema}
-              initialValues={{ email: "nabeel@gmail.com", password: "1234567" }}
+              initialValues={{ email: "", password: "" }}
               onSubmit={login}
             >
               {(props) => {

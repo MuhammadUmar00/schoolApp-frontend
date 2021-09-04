@@ -49,12 +49,11 @@ export default function CardDetails({ navigation, route }) {
   async function onSuccess() {
     setMakePayment(false);
     // alert("success");
-  //  await download('');
   }
 
   function onCancel() {
     setMakePayment(false);
-    alert("canceled");
+    // alert("payment canceled");
   }
 
   useEffect(() => {

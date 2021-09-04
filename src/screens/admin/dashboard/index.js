@@ -96,9 +96,8 @@ export default function Dashboard({ navigation }) {
         style={{ width: "100%", alignSelf: "center" }}
         contentContainerStyle={{ alignItems: "center" }}
         data={categories}
+        keyExtractor={item => String(item._id)}
         renderItem={({ item, index }) => {
-          item.icon = bottomList[index].icon;
-          item.key = bottomList[index].key;
           return (
             <>
               <TouchableOpacity

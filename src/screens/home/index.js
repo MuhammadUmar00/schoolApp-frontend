@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Linking,
   BackHandler,
-  Alert
+  Alert,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { HorizontalCard, Card } from "../../components";
@@ -21,12 +21,14 @@ export default function Home({ navigation }) {
   const HEIGHT = Dimensions.get("screen").height;
   const WIDTH = Dimensions.get("screen").width;
 
-  const [categories, setCategories] = useState('');
+  const [categories, setCategories] = useState("");
 
   const [topList, setTopList] = useState([
     { name: "Repair", icon: "hammer-screwdriver", key: "1" },
     { name: "News", icon: "bell", key: "2" },
     { name: "Enquiry", icon: "phone-call", key: "3" },
+    { name: "Mail", icon: "email", key: "4" },
+    { name: "WhatsApp", icon: "whatsapp", key: "5" },
   ]);
 
   const [bottomList, setBottomList] = useState([
@@ -50,14 +52,38 @@ export default function Home({ navigation }) {
     if (response?.category) setCategories(response.category);
   }
 
-  function enquiryAlert() {
-    alert(
-      "E-mail: pbmotivate@gmail.com \n\nCall/Whatsapp: 0206429275 / 0557093036 \n\nFacebook/Instagram/Twitter: @pbpagez"
-    );
-  }
+  // function enquiryAlert() {
+  //   // alert(
+  //   //   "E-mail: pbmotivate@gmail.com \n\nCall/Whatsapp: 0206429275 / 0557093036 \n\nFacebook/Instagram/Twitter: @pbpagez"
+  //   // );
 
-  function redirect() {
-    Linking.openURL("https://www.pbpagez.com/");
+  // }
+
+  function actionPressHandler(actionType){
+        switch (actionType) {
+          case "Repair":
+            
+            break;
+          case "News":
+            Linking.openURL("https://www.pbpagez.com/");
+            break;
+          case "Enquiry":
+            Linking.openURL("tel:0557093036");
+            break;
+          case "Mail":
+            Linking.openURL("mailto:pbmotivate@gmail.com");
+            break;
+          case "WhatsApp":
+            Linking.openURL(
+              `http://api.whatsapp.com/send?phone=${
+                "+233" + "0206429275"
+              }`
+            )
+            break;
+        
+          default:
+            break;
+        }
   }
 
   // useEffect(() => {
@@ -117,33 +143,13 @@ export default function Home({ navigation }) {
           data={topList}
           renderItem={({ item, index }) => {
             return (
-              <>
-                {item.name === "Enquiry" ? (
-                  <TouchableOpacity activeOpacity={0.9} onPress={enquiryAlert}>
-                    <Card
-                      item={item}
-                      height={HEIGHT * 0.105}
-                      width={HEIGHT * 0.105}
-                    />
-                  </TouchableOpacity>
-                ) : item.name === "News" ? (
-                  <TouchableOpacity activeOpacity={0.9} onPress={redirect}>
-                    <Card
-                      item={item}
-                      height={HEIGHT * 0.105}
-                      width={HEIGHT * 0.105}
-                    />
-                  </TouchableOpacity>
-                ) : (
-                  <TouchableOpacity activeOpacity={0.9}>
-                    <Card
-                      item={item}
-                      height={HEIGHT * 0.105}
-                      width={HEIGHT * 0.105}
-                    />
-                  </TouchableOpacity>
-                )}
-              </>
+              <TouchableOpacity activeOpacity={0.9} onPress={()=>actionPressHandler(item.name)}>
+                <Card
+                  item={item}
+                  height={HEIGHT * 0.105}
+                  width={HEIGHT * 0.105}
+                />
+              </TouchableOpacity>
             );
           }}
         />
@@ -158,7 +164,11 @@ export default function Home({ navigation }) {
             return (
               <>
                 <TouchableOpacity
-                  onPress={() => item.name === "Extras" ? navigation.navigate("Extras") : navigation.navigate("List", item)}
+                  onPress={() =>
+                    item.name === "Extras"
+                      ? navigation.navigate("Extras")
+                      : navigation.navigate("List", item)
+                  }
                   activeOpacity={0.9}
                 >
                   <HorizontalCard
