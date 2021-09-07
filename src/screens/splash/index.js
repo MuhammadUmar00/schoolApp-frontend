@@ -11,7 +11,7 @@ export default function Splash({ navigation }) {
 
     currentUser = JSON.parse(currentUser);
 
-    // console.log(currentUser.info.type)
+    // //console.log(currentUser.info.type)
 
     if(currentUser && currentUser?.type === "admin") navigation.navigate("AdminDrawer"); 
     else navigation.navigate("HomeDrawer"); 

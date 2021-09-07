@@ -48,7 +48,7 @@ export default function Login({ navigation }) {
     const response = await http(url);
 
     if (response?.success) {
-      // console.log(response);
+      // //console.log(response);
 
       await AsyncStorage.setItem("user", JSON.stringify(response.info));
 
@@ -137,7 +137,7 @@ export default function Login({ navigation }) {
                     </TouchableOpacity>
                     <View style={loginStyles.text}>
                       <Text style={loginStyles.donthave}>
-                        Don't have an accout?...
+                        Don't have an account?...
                       </Text>
                       <TouchableOpacity
                         onPress={() => navigation.navigate("Signup")}

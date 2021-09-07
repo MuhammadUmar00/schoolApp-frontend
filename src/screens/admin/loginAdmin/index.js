@@ -49,7 +49,7 @@ export default function AdminLogin({ navigation }) {
 
     if (response?.success) {
 
-      // console.log(response);
+      // //console.log(response);
 
       await AsyncStorage.setItem("user", JSON.stringify(response.info));
 

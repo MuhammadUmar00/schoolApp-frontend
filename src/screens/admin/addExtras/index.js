@@ -37,7 +37,7 @@ export default function AddExtras({ navigation }) {
       copyToCacheDirectory: false,
     });
 
-    console.log(result, "DOCUMENT PICKER RESULT");
+    //console.log(result, "DOCUMENT PICKER RESULT");
 
     const uri = FileSystem.documentDirectory + result.name;
 
@@ -57,14 +57,14 @@ export default function AddExtras({ navigation }) {
       // size: size,
     };
 
-    console.log(fileToUpload, "...............file");
+    //console.log(fileToUpload, "...............file");
 
     setCourseFile(fileToUpload);
   }
 
   async function upload( values, actions) {
     
-    // console.log(values);
+    // //console.log(values);
 
     const form = new FormData();
 
@@ -87,7 +87,7 @@ export default function AddExtras({ navigation }) {
 
     const response = await http(url, options);
 
-    // console.log(response, "response");
+    // //console.log(response, "response");
 
     if (response) {
       ToastAndroid.show('extra added successfully', ToastAndroid.SHORT);

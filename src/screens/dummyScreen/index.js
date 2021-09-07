@@ -55,7 +55,7 @@ export default function DummyScreen({ route, navigation }) {
 
     const response = await http(url);
 
-    console.log(response, "response")
+    //console.log(response, "response")
 
     if (response?.courses) setCourses(response.courses);
   }
@@ -65,7 +65,7 @@ export default function DummyScreen({ route, navigation }) {
 
     const options = { method: "DELETE" };
 
-    // console.log(response);
+    // //console.log(response);
 
     const response = await http(url, options);
 

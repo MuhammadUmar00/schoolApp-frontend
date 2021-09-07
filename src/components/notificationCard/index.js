@@ -4,7 +4,7 @@ import { patientCardStyles } from './notificationStyles'
 import { Ionicons } from '@expo/vector-icons';
 
 export default function NotificationCard({ item, height, width, borderRadius }) {
-    console.log(item, "NOTI")
+    //console.log(item, "NOTI")
     return (
         <View style={{...patientCardStyles.card, height,width}}>
             <View style={{...patientCardStyles.iconBox}}>

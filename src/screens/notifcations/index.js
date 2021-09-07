@@ -67,7 +67,7 @@ export default function Notifications({navigation}) {
   
     const options = { method: "DELETE" };
   
-    // console.log(response);
+    // //console.log(response);
   
     const response = await http(url, options);
   

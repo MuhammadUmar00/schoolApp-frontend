@@ -24,9 +24,9 @@ export default function Home({ navigation }) {
   const [categories, setCategories] = useState("");
 
   const [topList, setTopList] = useState([
-    { name: "Repair", icon: "hammer-screwdriver", key: "1" },
+    { name: "E-Learn", icon: "laptop", key: "1" },
     { name: "News", icon: "bell", key: "2" },
-    { name: "Enquiry", icon: "phone-call", key: "3" },
+    { name: "Enquiry", icon: "phone", key: "3" },
     { name: "Mail", icon: "email", key: "4" },
     { name: "WhatsApp", icon: "whatsapp", key: "5" },
   ]);
@@ -53,37 +53,34 @@ export default function Home({ navigation }) {
   }
 
   // function enquiryAlert() {
-  //   // alert(
-  //   //   "E-mail: pbmotivate@gmail.com \n\nCall/Whatsapp: 0206429275 / 0557093036 \n\nFacebook/Instagram/Twitter: @pbpagez"
-  //   // );
-
+  //   alert(
+  //     "E-mail: pbmotivate@gmail.com \n\nCall/Whatsapp: 0206429275 / 0557093036 \n\nFacebook/Instagram/Twitter: @pbpagez"
+  //   );
   // }
 
-  function actionPressHandler(actionType){
-        switch (actionType) {
-          case "Repair":
-            
-            break;
-          case "News":
-            Linking.openURL("https://www.pbpagez.com/");
-            break;
-          case "Enquiry":
-            Linking.openURL("tel:0557093036");
-            break;
-          case "Mail":
-            Linking.openURL("mailto:pbmotivate@gmail.com");
-            break;
-          case "WhatsApp":
-            Linking.openURL(
-              `http://api.whatsapp.com/send?phone=${
-                "+233" + "0206429275"
-              }`
-            )
-            break;
-        
-          default:
-            break;
-        }
+  function actionPressHandler(actionType) {
+    switch (actionType) {
+      case "E-Learn":
+        Linking.openURL("http://learn.pbpagez.com/");
+        break;
+      case "News":
+        Linking.openURL("https://www.pbpagez.com/");
+        break;
+      case "Enquiry":
+        Linking.openURL("tel:0557093036");
+        break;
+      case "Mail":
+        Linking.openURL("mailto:pbmotivate@gmail.com");
+        break;
+      case "WhatsApp":
+        Linking.openURL(
+          `http://api.whatsapp.com/send?phone=${"+233" + "0206429275"}`
+        );
+        break;
+
+      default:
+        break;
+    }
   }
 
   // useEffect(() => {
@@ -122,14 +119,27 @@ export default function Home({ navigation }) {
       <View style={homeStyles.topcontainer}>
         <Text
           style={{
-            marginTop: "20%",
+            marginTop: "17%",
+            textAlign: "center",
+            fontSize: 20,
+            width: "90%",
+            fontWeight: "900",
+            color: "white",
+            fontFamily: "monospace",
+            fontWeight: "bold",
+          }}
+        >
+          PBPAGEZ.com
+        </Text>
+        <Text
+          style={{
+            marginTop: "3%",
             textAlign: "center",
             fontSize: 15,
             width: "90%",
             fontWeight: "900",
             color: "white",
             fontFamily: "monospace",
-            fontWeight: "bold",
           }}
         >
           Welcome to Ghana's number One Educational Application.
@@ -143,7 +153,10 @@ export default function Home({ navigation }) {
           data={topList}
           renderItem={({ item, index }) => {
             return (
-              <TouchableOpacity activeOpacity={0.9} onPress={()=>actionPressHandler(item.name)}>
+              <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={() => actionPressHandler(item.name)}
+              >
                 <Card
                   item={item}
                   height={HEIGHT * 0.105}

@@ -29,9 +29,9 @@ export default function CardDetails({ navigation, route }) {
   const [cardDetails, setCardDetails] = useState();
   const [makePayment, setMakePayment] = useState(false);
   const [metaData, setMetaData] = useState({
-    billingEmail: "paystackwebview@something.com",
+    billingEmail: "paulboat58@gmail.com",
   });
-  const [totalAmount, setTotalAmount] = useState(10);
+  const [totalAmount, setTotalAmount] = useState(item.price);
   const paystackStyles = { indicatorColor: "#128da5" };
 
   async function getUser() {
@@ -49,20 +49,22 @@ export default function CardDetails({ navigation, route }) {
   async function onSuccess() {
     setMakePayment(false);
     // alert("success");
+  //  await download('');
   }
 
   function onCancel() {
     setMakePayment(false);
-    // alert("payment canceled");
+    alert("canceled");
   }
 
   useEffect(() => {
+    alert(JSON.stringify(item))
     getUser();
   }, []);
 
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView>
           <ScrollView
             style={{ width: WIDTH }}
@@ -93,7 +95,9 @@ export default function CardDetails({ navigation, route }) {
             >
               {user.email}
             </Text>
-            <TouchableOpacity onPress={() => setMakePayment(true)}>
+            <TouchableOpacity 
+            // onPress={() => setMakePayment(true)}
+            >
               <ButtonComp
                 title="Enter Payment Details"
                 width={WIDTH * 0.7}
@@ -105,7 +109,7 @@ export default function CardDetails({ navigation, route }) {
             </TouchableOpacity>
           </ScrollView>
         </KeyboardAvoidingView>
-      </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback> */}
 
       {makePayment && (
         <PayStack

@@ -5,7 +5,7 @@ import { BASE_URL } from "@constants";
 
 export default function ViewPDF({ route }) {
   const item = route.params;
-  console.log(`${BASE_URL}/${item.file}`);
+  //console.log(`${BASE_URL}/${item.file}`);
 
   return (
     <View style={{ height: "100%", width: "100%", marginTop: "10%" }}>
@@ -17,7 +17,7 @@ export default function ViewPDF({ route }) {
           },
         }}
         withScroll
-        source={{ uri: `${BASE_URL}/${item.file}` }}
+        source={{ uri: `${item.file}` }}
       />
     </View>
   );

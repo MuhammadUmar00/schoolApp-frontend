@@ -65,13 +65,14 @@ export default function Signup({ navigation }) {
 
     if (response?.success) {
       
-      alert("Account has been Created");
+      await  AsyncStorage.setItem("user", JSON.stringify(response.info));
       
-      AsyncStorage.setItem("user", JSON.stringify(resJSON));
+      alert("Account has been Created");
+     
+      navigation.navigate("Login");
       
       actions.resetForm();
       
-      navigation.navigate("Home");
     
     } else alert("This email is already in use of an Other Account");
 
@@ -169,7 +170,7 @@ export default function Signup({ navigation }) {
                     </TouchableOpacity>
                     <View style={signupStyles.text}>
                       <Text style={signupStyles.donthave}>
-                        Already have an accout?...
+                        Already have an account?...
                       </Text>
                       <TouchableOpacity
                         onPress={() => navigation.navigate("Login")}

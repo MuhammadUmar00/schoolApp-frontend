@@ -24,7 +24,7 @@ export default function ListScreen({ route, navigation }) {
 
     const response = await http(url);
 
-    // console.log(response, "response");
+    // //console.log(response, "response");
 
     if (response?.subCategories) setSubCategories(response.subCategories);
   }

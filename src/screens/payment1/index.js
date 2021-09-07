@@ -22,7 +22,7 @@ export default function AskForPayment({ navigation, route }) {
     const [metaData, setMetaData] = useState({
         billingEmail: "paystackwebview@something.com",
     });
-    const [totalAmount, setTotalAmount] = useState(10);
+    const [totalAmount, setTotalAmount] = useState(item.price);
     const paystackStyles = { indicatorColor: "#128da5" };
 
     async function getUser() {
@@ -40,13 +40,13 @@ export default function AskForPayment({ navigation, route }) {
     async function onSuccess() {
         setMakePayment(false);
         createReciept()
-         navigation.navigate("Read", item)
+        navigation.navigate("Read", item)
         //  await download('');
     }
 
     function onCancel() {
         setMakePayment(false);
-        alert("canceled");
+        // alert("canceled");
     }
 
     useEffect(() => {

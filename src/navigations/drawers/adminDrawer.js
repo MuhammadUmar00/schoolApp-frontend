@@ -5,6 +5,7 @@ import {
   ListScreen,
   ReadScreen,
   AdminLogin,
+  Login,
   AddCourse,
   Dashboard,
   ViewPDF,
@@ -66,6 +67,11 @@ export default function AdminDrawer() {
       <Drawer.Screen
         name="AdminLogin"
         component={AdminLogin}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+        name="Login"
+        component={Login}
         options={{ headerShown: false }}
       />
       <Drawer.Screen

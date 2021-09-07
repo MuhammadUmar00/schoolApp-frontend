@@ -48,7 +48,7 @@ export default function PaidCourses({ route, navigation }) {
    
     const response = await http(url);
 
-    // console.log(response, "response")
+    // //console.log(response, "response")
 
     if (response?.courses) setCourses(response.courses);
   }

@@ -8,7 +8,7 @@ export default function PayStack({ metaData, amount, onSuccess, onCancel, styles
     <View style={{ flex: 1 }}>
       <Paystack
         paystackKey={PaystackCreds.livePublic}
-        amount={`${amount}.00`}
+        amount={amount}
         billingEmail={metaData.billingEmail}
         activityIndicatorColor={styles.indicatorColor || "green"}
         onCancel={onCancel}

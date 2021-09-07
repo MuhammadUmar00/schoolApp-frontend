@@ -18,7 +18,7 @@ const HEIGHT = Dimensions.get("screen").height;
 
 export default function ReadScreen({ route, navigation }) {
   const screenDetails = route.params;
-  // console.log(screenDetails.file)
+  // //console.log(screenDetails.file)
 
   return (
     <View style={readStyles.container}>
@@ -55,7 +55,7 @@ export default function ReadScreen({ route, navigation }) {
       </View>
       <View style={readStyles.card3}>
         <TouchableOpacity
-          onPress={() => download(screenDetails.file)}
+          onPress={() => download(screenDetails.file, screenDetails.name)}
           style={{ alignSelf: "center" }}
         >
           <ButtonComp

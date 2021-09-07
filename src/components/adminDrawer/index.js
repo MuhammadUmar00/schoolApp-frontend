@@ -42,21 +42,20 @@ export function AdminDrawerComp(props) {
   async function getUser() {
     let savedUser = await AsyncStorage.getItem("user");
     savedUser = JSON.parse(savedUser);
-    console.log(savedUser, "YEH USER")
+    //console.log(savedUser, "YEH USER")
     setUser(savedUser);
+  }
+
+  async function logOut() {
+    await AsyncStorage.clear();
+    setUser(null);
+    props.navigation.navigate("AdminLogin")
   }
 
   useEffect(() => {
     getCategories();
     getUser();
   }, []);
-
-  function logOut() {
-    AsyncStorage.clear();
-    setUser(null);
-    props.navigation.navigate("Login")
-  }
-  
 
   return (
     <View style={{ flex: 1 }}>
@@ -152,21 +151,13 @@ export function AdminDrawerComp(props) {
             </View>
 
             <View style={styles.homeView}>
-            {user === null ?
-            <DrawerItem
-              icon={() => (
-                <FontAwesome name="sign-out" color="#128da5" size={20} />
-              )}
-              label="Log in"
-              onPress={() => props.navigation.navigate("Login")}
-            /> :
             <DrawerItem
               icon={() => (
                 <FontAwesome name="sign-out" color="#128da5" size={20} />
               )}
               label="Log Out"
               onPress={logOut}
-            /> }
+            /> 
             </View>
           </Drawer.Section>
         </View>

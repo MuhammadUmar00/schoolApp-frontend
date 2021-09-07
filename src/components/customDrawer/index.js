@@ -27,7 +27,7 @@ export function UserDrawerComp({navigation}) {
   async function getUser() {
     let tempUser = await AsyncStorage.getItem("user")
     tempUser = JSON.parse(tempUser);
-    // console.log(tempUser, "checkuser");
+    // //console.log(tempUser, "checkuser");
     setUser(tempUser);
   }
 

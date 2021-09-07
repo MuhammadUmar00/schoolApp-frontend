@@ -36,7 +36,7 @@ export default function AddCourse({ navigation }) {
       copyToCacheDirectory: false,
     });
 
-    console.log(result, "DOCUMENT PICKER RESULT");
+    //console.log(result, "DOCUMENT PICKER RESULT");
 
     const uri = FileSystem.documentDirectory + result.name;
 
@@ -61,9 +61,13 @@ export default function AddCourse({ navigation }) {
 
   async function upload(values, actions) {
 
-    // console.log(values);
+    // //console.log(values);
 
     const form = new FormData();
+
+    if(values.subcategorie === '611addf8b324f12774e4f703') form.append("price",  4);
+    if(values.subcategorie === '611addf8b324f12774e4f704') form.append("price",  6);
+    if(values.subcategorie === '611addf8b324f12774e4f705') form.append("price",  8);
 
     form.append("courseFile", courseFile);
     form.append("name", values.name);
@@ -84,7 +88,7 @@ export default function AddCourse({ navigation }) {
 
     const response = await http(url, options);
 
-    // console.log(response, "response");
+    // //console.log(response, "response");
 
     if (response) {
       ToastAndroid.show('course added successfully', ToastAndroid.SHORT);
@@ -97,7 +101,7 @@ export default function AddCourse({ navigation }) {
 
     const response = await http(url);
 
-    // console.log(response, 'Categories');
+    // //console.log(response, 'Categories');
 
     if (response?.category) setCategorie(response.category);
   }
@@ -107,7 +111,7 @@ export default function AddCourse({ navigation }) {
 
     const response = await http(url);
 
-    // console.log(response, 'Sub-Categories');
+    // //console.log(response, 'Sub-Categories');
 
     if (response?.subCategories) setSubCategorie(response.subCategories);
   }

@@ -38,7 +38,7 @@ export default function Extras({ route, navigation }) {
   async function getUser() {
     let savedUser = await AsyncStorage.getItem("user");
     savedUser = JSON.parse(savedUser);
-    console.log(savedUser, "YEH USER")
+    //console.log(savedUser, "YEH USER")
     setUser(savedUser);
   }
 
@@ -50,7 +50,7 @@ export default function Extras({ route, navigation }) {
 
     const response = await http(url);
 
-    // console.log(response, "response")
+    // //console.log(response, "response")
 
     if (response?.courses) setCourses(response.courses);
   }
@@ -60,7 +60,7 @@ export default function Extras({ route, navigation }) {
 
     const options = { method: "DELETE" };
 
-    // console.log(response);
+    // //console.log(response);
 
     const response = await http(url, options);
 
