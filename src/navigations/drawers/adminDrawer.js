@@ -70,11 +70,6 @@ export default function AdminDrawer() {
         options={{ headerShown: false }}
       />
       <Drawer.Screen
-        name="Login"
-        component={Login}
-        options={{ headerShown: false }}
-      />
-      <Drawer.Screen
         name="ViewPDF"
         component={ViewPDF}
         options={{ headerShown: false }}

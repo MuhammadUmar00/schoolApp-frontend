@@ -69,7 +69,7 @@ export default function Signup({ navigation }) {
       
       alert("Account has been Created");
      
-      navigation.navigate("Login");
+      navigation.navigate("HomeDrawer");
       
       actions.resetForm();
       

@@ -56,7 +56,7 @@ export default function Login({ navigation }) {
 
       actions.resetForm();
 
-      navigation.navigate("Home");
+      navigation.navigate("HomeDrawer");
     } else {
       alert(response);
     }

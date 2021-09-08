@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Splash } from '../screens'
+import { Splash, Login, Signup } from '../screens'
 import HomeDrawer from './drawers/userDrawer'
 import AdminDrawer from './drawers/adminDrawer'
 
@@ -14,6 +14,8 @@ export default function StartStack() {
         <Stack.Screen name="Splash" component={Splash} options={{headerShown:false}}/>
         <Stack.Screen name="HomeDrawer" component={HomeDrawer} options={{headerShown:false}}/>
         <Stack.Screen name="AdminDrawer" component={AdminDrawer} options={{headerShown:false}}/>
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

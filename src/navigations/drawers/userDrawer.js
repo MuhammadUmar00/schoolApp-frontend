@@ -18,6 +18,7 @@ import {
     Notifications,
     Extras
 } from '../../screens';
+import { useFocusEffect } from "@react-navigation/native";
 import LayOut from '../../components/layout';
 import { UserDrawerComp } from '../../components/customDrawer';
 import AdminDrawer from './adminDrawer';
@@ -29,11 +30,13 @@ export default function UserDrawer() {
 
     const [routeName, setRouteName] = React.useState("")
 
+    const [user, setUser] = React.useState("")
+
     async function getUser() {
         let currentUser = await AsyncStorage.getItem("user");
 
         currentUser = JSON.parse(currentUser);
-
+        setUser(currentUser);
         //console.log(currentUser)
 
         if (currentUser === null) setRouteName("Login");
@@ -41,45 +44,27 @@ export default function UserDrawer() {
 
     }
 
+    useFocusEffect(
+        React.useCallback(() => {
+            getUser();
+        }, [user])
+      );
+
     React.useEffect(() => {
         getUser()
     }, [])
 
     return (
         <>
-            {routeName === "Login" ?
-                < Drawer.Navigator initialRouteName="Login"
-                    drawerContent={(props) => <UserDrawerComp {...props} />}
-                >
-                    <Drawer.Screen name="Login" component={Login} options={{ headerShown: false }} />
-                    <Drawer.Screen name="Home" component={Home} options={{ headerShown: false }} />
-                    <Drawer.Screen name="List" component={ListScreen} options={{ headerShown: false }} />
-                    <Drawer.Screen name="Boxes" component={DummyScreen} options={{ headerShown: false }} />
-                    <Drawer.Screen name="Dummy" component={DummyScreen2} options={{ headerShown: false }} />
-                    <Drawer.Screen name="Read" component={ReadScreen} options={{ headerShown: false }} />
-                    <Drawer.Screen name="Layout" component={LayOut} options={{ headerShown: false }} />
-                    <Drawer.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
-                    <Drawer.Screen name="AdminLogin" component={AdminLogin} options={{ headerShown: false }} />
-                    <Drawer.Screen name="ViewPDF" component={ViewPDF} options={{ headerShown: false }} />
-                    <Drawer.Screen name="Admin" component={AdminDrawer} options={{ headerShown: false }} />
-                    <Drawer.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
-                    <Drawer.Screen name="Payment1" component={AskForPayment} options={{ headerShown: false }} />
-                    <Drawer.Screen name="Payment2" component={CardDetails} options={{ headerShown: false }} />
-                    <Drawer.Screen name="Notifications" component={Notifications} options={{ headerShown: false }} />
-                    <Drawer.Screen name="Extras" component={Extras} options={{ headerShown: false }} />
-                </Drawer.Navigator>
-                : routeName === "Home" &&
                 <Drawer.Navigator initialRouteName="Home"
                     drawerContent={(props) => <UserDrawerComp {...props} />}
                 >
                     <Drawer.Screen name="Home" component={Home} options={{ headerShown: false }} />
-                    <Drawer.Screen name="Login" component={Login} options={{ headerShown: false }} />
                     <Drawer.Screen name="List" component={ListScreen} options={{ headerShown: false }} />
                     <Drawer.Screen name="Boxes" component={DummyScreen} options={{ headerShown: false }} />
                     <Drawer.Screen name="Dummy" component={DummyScreen2} options={{ headerShown: false }} />
                     <Drawer.Screen name="Read" component={ReadScreen} options={{ headerShown: false }} />
                     <Drawer.Screen name="Layout" component={LayOut} options={{ headerShown: false }} />
-                    <Drawer.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
                     <Drawer.Screen name="AdminLogin" component={AdminLogin} options={{ headerShown: false }} />
                     <Drawer.Screen name="ViewPDF" component={ViewPDF} options={{ headerShown: false }} />
                     <Drawer.Screen name="Admin" component={AdminDrawer} options={{ headerShown: false }} />
@@ -89,7 +74,6 @@ export default function UserDrawer() {
                     <Drawer.Screen name="Notifications" component={Notifications} options={{ headerShown: false }} />
                     <Drawer.Screen name="Extras" component={Extras} options={{ headerShown: false }} />
                 </Drawer.Navigator>
-            }
         </>
 
     );

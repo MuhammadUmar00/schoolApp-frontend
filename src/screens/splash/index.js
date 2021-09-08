@@ -14,6 +14,7 @@ export default function Splash({ navigation }) {
     // //console.log(currentUser.info.type)
 
     if(currentUser && currentUser?.type === "admin") navigation.navigate("AdminDrawer"); 
+    else if(currentUser === null) navigation.navigate("Login");
     else navigation.navigate("HomeDrawer"); 
        
   }
