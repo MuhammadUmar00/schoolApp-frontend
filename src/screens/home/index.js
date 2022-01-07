@@ -129,7 +129,7 @@ export default function Home({ navigation }) {
             fontWeight: "bold",
           }}
         >
-          PBPAGEZ.com
+          Education.com
         </Text>
         <Text
           style={{
@@ -144,28 +144,6 @@ export default function Home({ navigation }) {
         >
           Welcome to Ghana's number One Educational Application.
         </Text>
-      </View>
-      <View style={{ height: "20%", padding: "5%", width: "100%" }}>
-        <FlatList
-          style={{ width: "100%" }}
-          showsHorizontalScrollIndicator={false}
-          horizontal={true}
-          data={topList}
-          renderItem={({ item, index }) => {
-            return (
-              <TouchableOpacity
-                activeOpacity={0.9}
-                onPress={() => actionPressHandler(item.name)}
-              >
-                <Card
-                  item={item}
-                  height={HEIGHT * 0.105}
-                  width={HEIGHT * 0.105}
-                />
-              </TouchableOpacity>
-            );
-          }}
-        />
       </View>
       <View style={{ width: "100%", alignItems: "center", flex: 1 }}>
         <FlatList

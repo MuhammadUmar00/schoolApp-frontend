@@ -58,7 +58,7 @@ export default function Login({ navigation }) {
 
       navigation.navigate("HomeDrawer");
     } else {
-      alert(response);
+      console.log(response);
     }
   }
 
@@ -145,19 +145,6 @@ export default function Login({ navigation }) {
                         <Text style={loginStyles.signup}>Sign Up</Text>
                       </TouchableOpacity>
                     </View>
-                    <TouchableOpacity
-                      onPress={() => navigation.navigate("AdminLogin")}
-                      style={loginStyles.loginAsAdmin}
-                    >
-                      <ButtonComp
-                        title="Login as Admin"
-                        width={WIDTH * 0.4}
-                        height={HEIGHT * 0.06}
-                        color="#fff"
-                        backgroundColor="#128da5"
-                        borderRadius={5}
-                      />
-                    </TouchableOpacity>
                   </>
                 );
               }}

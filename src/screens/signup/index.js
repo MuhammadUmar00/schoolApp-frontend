@@ -37,16 +37,7 @@ const signupSchema = yup.object({
     ),
   phone: yup
     .string()
-    .required()
-    .test(
-      "Phone Number",
-      "Phone Number must fullfill the requirement example 233xxxxxxxx",
-      (val) => {
-        return new RegExp(
-          /^(([2][3][3])|[0])?\d{9}$/gim
-        ).test(val);
-      }
-    ),
+    .required(),
   password: yup.string().required().min(6),
 });
 
